@@ -1,6 +1,7 @@
 package br.com.bmo.taskmanager;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -83,6 +84,14 @@ public class Taskmanagerv2Application implements CommandLineRunner {
 		System.out.println("Get Tasks Created this Month");
 		Iterable<Task> allTasksByMonth = taskService.getAllTasksByMonth(2);
 		allTasksByMonth.forEach(System.out::println);
+		
+		System.out.println("Select Tasks by Category.name=Studyi");
+		List<Task> allTasksByCategory = taskService.getTasksByCategoryName("Studyi");
+		allTasksByCategory.forEach(System.out::println);
+		
+		System.out.println("Select Tasks by Category.name LIKE %study%");
+		allTasksByCategory = taskService.getTasksByCategoryNameLike("%study%");
+		allTasksByCategory.forEach(System.out::println);
 	}
 
 }
