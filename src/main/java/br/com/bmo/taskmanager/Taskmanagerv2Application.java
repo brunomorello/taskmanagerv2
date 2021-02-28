@@ -5,15 +5,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.bmo.taskmanager.orm.Category;
-import br.com.bmo.taskmanager.repository.CategoryRepository;
+import br.com.bmo.taskmanager.service.CategoryService;
 
 @SpringBootApplication
 public class Taskmanagerv2Application implements CommandLineRunner {
-
-	private final CategoryRepository repository;
 	
-	public Taskmanagerv2Application(CategoryRepository repository) {
-		this.repository = repository;
+	private final CategoryService categoryService;
+	
+	public Taskmanagerv2Application(CategoryService categoryService) {
+		this.categoryService = categoryService;
 	}
 
 	public static void main(String[] args) {
@@ -23,9 +23,15 @@ public class Taskmanagerv2Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		Category category = new Category();
-		category.setName("Housekeeping");
+		category.setName("Study");
 		
-		repository.save(category);
+		categoryService.save(category);
+		
+		Category category2 = new Category();
+		category2.setId(1);
+		category2.setName("Health");
+		
+		categoryService.update(category2);
 	}
 
 }
