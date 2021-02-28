@@ -22,4 +22,13 @@ public class CategoryService {
 		categoryRepository.save(category);
 	}
 	
+	public void showAllCategories() {
+		Iterable<Category> categoriesList = categoryRepository.findAll();
+		categoriesList.forEach(category -> System.out.println(category));
+	}
+	
+	public void delete(Category category) {
+		categoryRepository.deleteById(category.getId());
+	}
+	
 }
