@@ -22,14 +22,14 @@ public class Taskmanagerv2Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Category category = new Category();
-		category.setName("Study");
-		
-		categoryService.save(category);
+//		Category category = new Category();
+//		category.setName("Study");
+//		
+//		categoryService.save(category);
 		
 		Category category2 = new Category();
-		category2.setId(1);
-		category2.setName("Health");
+		category2.setId(3);
+		category2.setName("Do the dishes");
 		
 		categoryService.update(category2);
 	}
