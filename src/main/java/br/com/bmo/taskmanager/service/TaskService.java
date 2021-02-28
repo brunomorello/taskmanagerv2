@@ -28,4 +28,8 @@ public class TaskService {
 	public Iterable<Task> getAllTasks() {
 		return taskRepository.findAll();
 	}
+	
+	public Iterable<Task> getAllTasksByMonth(Integer month) {
+		return taskRepository.findTasksByMonth(month);
+	}
 }
