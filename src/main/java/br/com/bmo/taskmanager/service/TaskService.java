@@ -1,5 +1,6 @@
 package br.com.bmo.taskmanager.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -31,5 +32,13 @@ public class TaskService {
 	
 	public Iterable<Task> getAllTasksByMonth(Integer month) {
 		return taskRepository.findTasksByMonth(month);
+	}
+	
+	public List<Task> getTasksByCategoryName(String name) {
+		return taskRepository.findByCategoryName(name);
+	}
+	
+	public List<Task> getTasksByCategoryNameLike(String name) {
+		return taskRepository.findByCategoryNameLike(name);
 	}
 }
