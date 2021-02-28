@@ -18,10 +18,6 @@ public class CategoryService {
 		categoryRepository.save(category);
 	}
 	
-	public void update(Category category) {
-		categoryRepository.save(category);
-	}
-	
 	public void showAllCategories() {
 		Iterable<Category> categoriesList = categoryRepository.findAll();
 		categoriesList.forEach(category -> System.out.println(category));
