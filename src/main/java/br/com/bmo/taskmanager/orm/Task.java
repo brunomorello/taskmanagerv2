@@ -76,5 +76,12 @@ public class Task {
 	public void setDueDate(LocalDateTime dueDate) {
 		this.dueDate = dueDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Task [id=" + id + ", description=" + description + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + ", dueDate=" + dueDate + ", owner=" + owner + ", status=" + status + ", category="
+				+ category + "]";
+	}
 	
 }

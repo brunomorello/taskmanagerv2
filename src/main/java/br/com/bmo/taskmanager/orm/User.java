@@ -17,11 +17,11 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String fistName;
+	private String firstName;
 	private String lastName;
 	private String login;
 	private String pwd;
-	private LocalDateTime createdAt = LocalDateTime.now();
+	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	@OneToMany(mappedBy = "owner")
 	private List<Task> task;
@@ -37,12 +37,6 @@ public class User {
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	public String getFistName() {
-		return fistName;
-	}
-	public void setFistName(String fistName) {
-		this.fistName = fistName;
 	}
 	public String getLastName() {
 		return lastName;
@@ -70,6 +64,20 @@ public class User {
 	}
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", login=" + login
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 	
 }
