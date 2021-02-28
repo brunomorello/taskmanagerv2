@@ -27,11 +27,20 @@ public class Taskmanagerv2Application implements CommandLineRunner {
 //		
 //		categoryService.save(category);
 		
-		Category category2 = new Category();
-		category2.setId(3);
-		category2.setName("Do the dishes");
+//		Category category2 = new Category();
+//		category2.setId(3);
+//		category2.setName("Do the dishes");
+//		
+//		categoryService.update(category2);
 		
-		categoryService.update(category2);
+		categoryService.showAllCategories();
+		
+		Category categoryToDelete = new Category();
+		categoryToDelete.setId(4);
+		
+		categoryService.delete(categoryToDelete);
+		
+		categoryService.showAllCategories();
 	}
 
 }
