@@ -38,44 +38,51 @@ public class Taskmanagerv2Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Category category = new Category();
-		category.setName("Study");
+//		Category category = new Category();
+//		category.setName("Study");
+//		
+//		categoryService.save(category);
+//		
+//		User user = new User();
+//		user.setFirstName("Bruno");
+//		user.setLogin("bmo");
+//		user.setPwd("123");
+//		userService.save(user);
+//		
+//		Status backlogStatus = new Status();
+//		backlogStatus.setName("Backlog");
+//		statusService.save(backlogStatus);
+//		
+//		Status inprogStatus = new Status();
+//		inprogStatus.setName("In Progress");
+//		statusService.save(inprogStatus);
+//		
+//		Status onHoldStatus = new Status();
+//		onHoldStatus.setName("On Hold");
+//		statusService.save(onHoldStatus);
+//		
+//		Status doneStatus = new Status();
+//		doneStatus.setName("Done");
+//		statusService.save(doneStatus);
+//		
+//		Task task = new Task();
+//		task.setDescription("Learn Spring Data");
+//		task.setCategory(category);
+//		task.setStatus(backlogStatus);
+//		task.setOwner(user);
+//		
+//		LocalDateTime dueDate = LocalDateTime.of(2021, 3, 1, 9, 0);
+//		task.setDueDate(dueDate);
+//		taskService.save(task);
+//		
+//		categoryService.showAllCategories();
 		
-		categoryService.save(category);
+		System.out.println("Finding Users by firstName");
+		userService.listUsersFoundByName("Bru%");
 		
-		User user = new User();
-		user.setFistName("Bruno");
-		user.setLogin("bmo");
-		user.setPwd("123");
-		userService.save(user);
-		
-		Status backlogStatus = new Status();
-		backlogStatus.setName("Backlog");
-		statusService.save(backlogStatus);
-		
-		Status inprogStatus = new Status();
-		inprogStatus.setName("In Progress");
-		statusService.save(inprogStatus);
-		
-		Status onHoldStatus = new Status();
-		onHoldStatus.setName("On Hold");
-		statusService.save(onHoldStatus);
-		
-		Status doneStatus = new Status();
-		doneStatus.setName("Done");
-		statusService.save(doneStatus);
-		
-		Task task = new Task();
-		task.setDescription("Learn Spring Data");
-		task.setCategory(category);
-		task.setStatus(backlogStatus);
-		task.setOwner(user);
-		
-		LocalDateTime dueDate = LocalDateTime.of(2021, 3, 1, 9, 0);
-		task.setDueDate(dueDate);
-		taskService.save(task);
-		
-		categoryService.showAllCategories();
+		System.out.println("Get Tasks Created this Month");
+		Iterable<Task> allTasksByMonth = taskService.getAllTasksByMonth(2);
+		allTasksByMonth.forEach(System.out::println);
 	}
 
 }
