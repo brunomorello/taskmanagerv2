@@ -25,7 +25,9 @@ public interface TaskRepository extends PagingAndSortingRepository<Task, Integer
 	@Query(value = "SELECT * FROM tasks t WHERE due_date >= :period", nativeQuery = true)
 	List<Task> findTaskDueDateIsEqualsOrGreaterThan(LocalDateTime period);
 	
-	// JPA Projection
+	// JPA Projection (Using interface based projections. It is possible to use class-based projections)
+	//    class-based projection can be called DTO (Data Transfer Object)
+	// 		and could be useful on views to apply projections  
 	@Query(value = "SELECT t.description, s.name as statusName FROM tasks t JOIN status s ON (t.status_id = s.id)", nativeQuery = true)
 	List<TaskProjection> findTaskByDescriptionAndStaus();
 }
