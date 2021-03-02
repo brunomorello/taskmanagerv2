@@ -96,6 +96,10 @@ public class Taskmanagerv2Application implements CommandLineRunner {
 		System.out.println("Select Tasks based on Due Date using Native Query");
 		List<Task> tasksList = taskService.getTasksByDueDateIsOrGreaterThan("2021-03-01T00:00:00");
 		tasksList.forEach(System.out::println);
+		
+		System.out.println("Select All Tasks at page 0");
+		Iterable<Task> allTasks = taskService.getAllTasks();
+		allTasks.forEach(System.out::println);
 	}
 
 }

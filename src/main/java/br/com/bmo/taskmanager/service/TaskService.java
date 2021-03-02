@@ -5,6 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.bmo.taskmanager.orm.Task;
@@ -30,7 +34,14 @@ public class TaskService {
 	}
 	
 	public Iterable<Task> getAllTasks() {
-		return taskRepository.findAll();
+		Integer page = 3;
+		Pageable pageable = PageRequest.of(page, 5, Sort.unsorted());
+		Page<Task> allTasksList = taskRepository.findAll(pageable);
+		
+		System.out.println("Page<Task> allTasksList =" + allTasksList);
+		System.out.println("Current Page " + allTasksList.getNumber());
+		System.out.println("Total " + allTasksList.getTotalElements());
+		return allTasksList;
 	}
 	
 	public Iterable<Task> getAllTasksByMonth(Integer month) {
