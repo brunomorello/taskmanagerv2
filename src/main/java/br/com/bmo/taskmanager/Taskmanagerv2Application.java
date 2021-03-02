@@ -92,6 +92,10 @@ public class Taskmanagerv2Application implements CommandLineRunner {
 		System.out.println("Select Tasks by Category.name LIKE %study%");
 		allTasksByCategory = taskService.getTasksByCategoryNameLike("%study%");
 		allTasksByCategory.forEach(System.out::println);
+		
+		System.out.println("Select Tasks based on Due Date using Native Query");
+		List<Task> tasksList = taskService.getTasksByDueDateIsOrGreaterThan("2021-03-01T00:00:00");
+		tasksList.forEach(System.out::println);
 	}
 
 }

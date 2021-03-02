@@ -1,5 +1,7 @@
 package br.com.bmo.taskmanager.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +14,7 @@ import br.com.bmo.taskmanager.repository.TaskRepository;
 public class TaskService {
 
 	private final TaskRepository taskRepository;
+//	private final
 
 	public TaskService(TaskRepository taskRepository) {
 		this.taskRepository = taskRepository;
@@ -40,5 +43,10 @@ public class TaskService {
 	
 	public List<Task> getTasksByCategoryNameLike(String name) {
 		return taskRepository.findByCategoryNameLike(name);
+	}
+	
+	public List<Task> getTasksByDueDateIsOrGreaterThan(String dateTime) {
+		LocalDateTime period = LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME);
+		return taskRepository.findTaskDueDateIsEqualsOrGreaterThan(period);
 	}
 }

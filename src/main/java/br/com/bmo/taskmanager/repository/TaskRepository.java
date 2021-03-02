@@ -1,5 +1,6 @@
 package br.com.bmo.taskmanager.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,8 @@ public interface TaskRepository extends CrudRepository<Task, Integer>{
 	
 	@Query("SELECT t from Task t JOIN t.category c WHERE c.name LIKE :name")
 	List<Task> findByCategoryNameLike(String name);
+	
+	// Native Query
+	@Query(value = "SELECT * FROM tasks t WHERE due_date >= :period", nativeQuery = true)
+	List<Task> findTaskDueDateIsEqualsOrGreaterThan(LocalDateTime period);
 }
