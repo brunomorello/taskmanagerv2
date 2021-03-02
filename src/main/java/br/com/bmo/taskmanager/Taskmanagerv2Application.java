@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import br.com.bmo.taskmanager.orm.Category;
 import br.com.bmo.taskmanager.orm.Status;
 import br.com.bmo.taskmanager.orm.Task;
+import br.com.bmo.taskmanager.orm.TaskProjection;
 import br.com.bmo.taskmanager.orm.User;
 import br.com.bmo.taskmanager.service.CategoryService;
 import br.com.bmo.taskmanager.service.StatusService;
@@ -100,6 +101,12 @@ public class Taskmanagerv2Application implements CommandLineRunner {
 		System.out.println("Select All Tasks at page 0");
 		Iterable<Task> allTasks = taskService.getAllTasks();
 		allTasks.forEach(System.out::println);
+		
+		System.out.println("Select All Tasks - Shows only Description and Status");
+		List<TaskProjection> tasksByDescrAndStatus = taskService.getTaskByDescriptionAndStaus();
+		tasksByDescrAndStatus.forEach(task -> {
+			System.out.println("Task Description: " + task.getDescription() + " - " + task.getStatusName());
+		});
 	}
 
 }
