@@ -34,8 +34,8 @@ public class TaskService {
 	}
 	
 	public Iterable<Task> getAllTasks() {
-		Integer page = 3;
-		Pageable pageable = PageRequest.of(page, 5, Sort.unsorted());
+		Integer page = 0;
+		Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.ASC, "description"));
 		Page<Task> allTasksList = taskRepository.findAll(pageable);
 		
 		System.out.println("Page<Task> allTasksList =" + allTasksList);
