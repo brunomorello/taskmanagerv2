@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.bmo.taskmanager.orm.Task;
+import br.com.bmo.taskmanager.orm.TaskProjection;
 import br.com.bmo.taskmanager.repository.TaskRepository;
 
 @Service
@@ -59,5 +60,9 @@ public class TaskService {
 	public List<Task> getTasksByDueDateIsOrGreaterThan(String dateTime) {
 		LocalDateTime period = LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME);
 		return taskRepository.findTaskDueDateIsEqualsOrGreaterThan(period);
+	}
+	
+	public List<TaskProjection> getTaskByDescriptionAndStaus() {
+		return taskRepository.findTaskByDescriptionAndStaus();
 	}
 }

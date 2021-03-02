@@ -8,6 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import br.com.bmo.taskmanager.orm.Task;
+import br.com.bmo.taskmanager.orm.TaskProjection;
 
 @Repository
 public interface TaskRepository extends PagingAndSortingRepository<Task, Integer>{
@@ -23,4 +24,8 @@ public interface TaskRepository extends PagingAndSortingRepository<Task, Integer
 	// Native Query
 	@Query(value = "SELECT * FROM tasks t WHERE due_date >= :period", nativeQuery = true)
 	List<Task> findTaskDueDateIsEqualsOrGreaterThan(LocalDateTime period);
+	
+	// JPA Projection
+	@Query(value = "SELECT t.description, s.name as statusName FROM tasks t JOIN status s ON (t.status_id = s.id)", nativeQuery = true)
+	List<TaskProjection> findTaskByDescriptionAndStaus();
 }
