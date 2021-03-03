@@ -14,6 +14,7 @@ import br.com.bmo.taskmanager.orm.TaskProjection;
 import br.com.bmo.taskmanager.orm.User;
 import br.com.bmo.taskmanager.service.CategoryService;
 import br.com.bmo.taskmanager.service.StatusService;
+import br.com.bmo.taskmanager.service.TaskReportService;
 import br.com.bmo.taskmanager.service.TaskService;
 import br.com.bmo.taskmanager.service.UserService;
 
@@ -24,13 +25,15 @@ public class Taskmanagerv2Application implements CommandLineRunner {
 	private final UserService userService;
 	private final StatusService statusService;
 	private final TaskService taskService;
+	private final TaskReportService taskReportService;
 
 	public Taskmanagerv2Application(CategoryService categoryService, UserService userService,
-			StatusService statusService, TaskService taskService) {
+			StatusService statusService, TaskService taskService, TaskReportService taskReportService) {
 		this.categoryService = categoryService;
 		this.userService = userService;
 		this.statusService = statusService;
 		this.taskService = taskService;
+		this.taskReportService = taskReportService;
 	}
 
 	public static void main(String[] args) {
@@ -107,6 +110,9 @@ public class Taskmanagerv2Application implements CommandLineRunner {
 		tasksByDescrAndStatus.forEach(task -> {
 			System.out.println("Task Description: " + task.getDescription() + " - " + task.getStatusName());
 		});
+		
+		System.out.println("Testing Task Report using Specification");
+		taskReportService.execute(null, null, 5, null, null);
 	}
 
 }
