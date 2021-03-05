@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.bmo.taskmanager.orm.Task;
-import br.com.bmo.taskmanager.orm.TaskProjection;
+import br.com.bmo.taskmanager.model.Task;
+import br.com.bmo.taskmanager.model.TaskProjection;
 
 @Repository
 public interface TaskRepository extends PagingAndSortingRepository<Task, Integer>, JpaSpecificationExecutor<Task>{

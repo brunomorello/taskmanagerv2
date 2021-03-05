@@ -1,4 +1,4 @@
-package br.com.bmo.taskmanager.orm;
+package br.com.bmo.taskmanager.model;
 
 import java.util.List;
 
@@ -10,37 +10,45 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "status")
-public class Status {
+@Table(name = "categories")
+public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
-	@OneToMany(mappedBy = "status")
+	@OneToMany(mappedBy = "category")
 	private List<Task> task;
+		
+	public Category() {
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 	public List<Task> getTask() {
 		return task;
 	}
+
 	public void setTask(List<Task> task) {
 		this.task = task;
 	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	@Override
 	public String toString() {
-		return "Status [id=" + id + ", name=" + name + "]";
+		return "Category [id=" + id + ", name=" + name + "]";
 	}
-	
 }

@@ -2,7 +2,7 @@ package br.com.bmo.taskmanager.service;
 
 import org.springframework.stereotype.Service;
 
-import br.com.bmo.taskmanager.orm.Category;
+import br.com.bmo.taskmanager.model.Category;
 import br.com.bmo.taskmanager.repository.CategoryRepository;
 
 @Service

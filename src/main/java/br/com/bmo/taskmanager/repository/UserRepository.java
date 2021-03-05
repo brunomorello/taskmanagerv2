@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.bmo.taskmanager.orm.User;
+import br.com.bmo.taskmanager.model.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer>{

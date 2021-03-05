@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import br.com.bmo.taskmanager.orm.Task;
+import br.com.bmo.taskmanager.model.Task;
 import br.com.bmo.taskmanager.repository.TaskRepository;
 import br.com.bmo.taskmanager.specification.SpecificationTask;
 

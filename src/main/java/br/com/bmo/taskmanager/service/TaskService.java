@@ -11,8 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import br.com.bmo.taskmanager.orm.Task;
-import br.com.bmo.taskmanager.orm.TaskProjection;
+import br.com.bmo.taskmanager.model.Task;
+import br.com.bmo.taskmanager.model.TaskProjection;
 import br.com.bmo.taskmanager.repository.TaskRepository;
 
 @Service

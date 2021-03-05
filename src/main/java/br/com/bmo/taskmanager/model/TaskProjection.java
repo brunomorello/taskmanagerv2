@@ -1,4 +1,4 @@
-package br.com.bmo.taskmanager.orm;
+package br.com.bmo.taskmanager.model;
 
 public interface TaskProjection {
 

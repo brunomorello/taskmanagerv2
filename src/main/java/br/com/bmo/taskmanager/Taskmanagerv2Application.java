@@ -7,11 +7,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import br.com.bmo.taskmanager.orm.Category;
-import br.com.bmo.taskmanager.orm.Status;
-import br.com.bmo.taskmanager.orm.Task;
-import br.com.bmo.taskmanager.orm.TaskProjection;
-import br.com.bmo.taskmanager.orm.User;
+import br.com.bmo.taskmanager.model.Category;
+import br.com.bmo.taskmanager.model.Status;
+import br.com.bmo.taskmanager.model.Task;
+import br.com.bmo.taskmanager.model.TaskProjection;
+import br.com.bmo.taskmanager.model.User;
 import br.com.bmo.taskmanager.service.CategoryService;
 import br.com.bmo.taskmanager.service.StatusService;
 import br.com.bmo.taskmanager.service.TaskReportService;

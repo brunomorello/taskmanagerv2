@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import br.com.bmo.taskmanager.orm.User;
+import br.com.bmo.taskmanager.model.User;
 import br.com.bmo.taskmanager.repository.UserRepository;
 
 @Service

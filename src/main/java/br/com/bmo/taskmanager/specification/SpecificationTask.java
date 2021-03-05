@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import br.com.bmo.taskmanager.orm.Task;
+import br.com.bmo.taskmanager.model.Task;
 
 public class SpecificationTask {
 

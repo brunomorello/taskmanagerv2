@@ -2,7 +2,7 @@ package br.com.bmo.taskmanager.service;
 
 import org.springframework.stereotype.Service;
 
-import br.com.bmo.taskmanager.orm.Status;
+import br.com.bmo.taskmanager.model.Status;
 import br.com.bmo.taskmanager.repository.StatusRepository;
 
 @Service
