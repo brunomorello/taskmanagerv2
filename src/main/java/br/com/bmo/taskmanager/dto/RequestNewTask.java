@@ -3,6 +3,8 @@ package br.com.bmo.taskmanager.dto;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import javax.validation.constraints.NotBlank;
+
 import br.com.bmo.taskmanager.model.Category;
 import br.com.bmo.taskmanager.model.Status;
 import br.com.bmo.taskmanager.model.Task;
@@ -10,11 +12,15 @@ import br.com.bmo.taskmanager.model.User;
 
 public class RequestNewTask {
 
+	@NotBlank
 	private String taskDesc;
+	@NotBlank
 	private String taskCategory;
 	private String taskDueDate;
 	private String taskDetails;
+	@NotBlank
 	private String taskOwner;
+	@NotBlank
 	private String taskStatus;
 	
 	public String getTaskStatus() {
