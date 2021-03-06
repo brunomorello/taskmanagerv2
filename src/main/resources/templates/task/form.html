@@ -21,9 +21,29 @@
 				<small>Select a Category</small>
 			</div>
 			<div>
+				<label for="taskOwner">Owner</label>
+				<select name="taskOwner">
+					<option value="0" selected="true">Select</option>
+					<option th:each="user : ${users}" value="0" th:value="${user.id}" th:text="${user.firstName}">Owner</option>
+				</select>
+				<small>Set a Owner</small>
+			</div>
+			<div>
+				<label for="taskStatus">Status</label>
+				<select name="taskStatus">
+					<option value="0" selected="true">Select</option>
+					<option th:each="status : ${statusList}" value="0" th:value="${status.id}" th:text="${status.name}">Status</option>
+				</select>
+				<small>Set a Status</small>
+			</div>
+			<div>
 				<label for="taskDueDate">Due Date</label>
-				<input type="datetime" name="taskDueDate" placeholder="YYYY-MM-DD hh:mm:ss" />
+				<input type="datetime" name="taskDueDate" placeholder="YYYY-MM-DD hh:mm" />
 				<small>Define a Due Date</small>
+			</div>
+			<div>
+				<label for="taskDetails">Details</label>
+				<textarea name="taskDetails" placeholder="If necessary provide more details"></textarea>
 			</div>
 			<button type="submit">Create Task</button>
 		</form>
