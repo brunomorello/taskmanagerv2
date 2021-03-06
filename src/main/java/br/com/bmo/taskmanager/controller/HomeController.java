@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.bmo.taskmanager.model.Task;
 import br.com.bmo.taskmanager.service.CategoryService;
@@ -43,10 +43,19 @@ public class HomeController {
 //		this.taskReportService = taskReportService;
 //	}
 
+	// Initial Example
+//	@GetMapping("/home")
+//	public String home(Model model) {
+//		List<Task> allTasksByCategory = taskService.getTasksByCategoryNameLike("%study%");
+//		model.addAttribute("tasks", allTasksByCategory);
+//		return "home";
+//	}
+	
 	@GetMapping("/home")
-	public String home(Model model) {
+	public ModelAndView home() {
 		List<Task> allTasksByCategory = taskService.getTasksByCategoryNameLike("%study%");
-		model.addAttribute("tasks", allTasksByCategory);
-		return "home";
+		ModelAndView mv = new ModelAndView("home");
+		mv.addObject("tasks", allTasksByCategory);
+		return mv;
 	}
 }
