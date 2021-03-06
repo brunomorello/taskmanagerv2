@@ -10,8 +10,27 @@
 </head>
 <body>
 	<div class="container">
+		<nav class="navbar navbar-expand navbar-dark bg-dark mb-3">
+			<div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link active" href="#">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Categories</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Users</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Reports</a>
+					</li>
+				</ul>
+				<a href="/tasks/form"><button class="btn btn-outline-success my-2 my-sm-0 me-2">New</button></a>
+			</div>
+		</nav>
 		<div class="col-sm-5">
-			<div class="card mb-3" th:each="task : ${tasks}">
+			<div class="card text-white bg-secondary mb-3" th:each="task : ${tasks}">
 				<div class="card-header" th:text="${task.description}">Task Name</div>
 				<div class="card-body">
 					<div class="row">
