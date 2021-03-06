@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<form action="/task/new" method="POST">
+			<div>
+				<label for="taskDesc">Short Description</label>
+				<input name="taskDesc" placeholder="Task Short Description" />
+				<small>Insert a short description</small>
+			</div>
+			<div>
+				<label for="taskCategory">Category</label>
+				<select name="taskCategory">
+					<option value="0" selected="true">Select</option>
+					<option th:each="category : ${categories}" value="0" th:value="${category.id}" th:text="${category.name}">Category</option>
+				</select>
+				<small>Select a Category</small>
+			</div>
+			<div>
+				<label for="taskDueDate">Due Date</label>
+				<input type="datetime" name="taskDueDate" placeholder="YYYY-MM-DD hh:mm:ss" />
+				<small>Define a Due Date</small>
+			</div>
+			<button type="submit">Create Task</button>
+		</form>
+	</div>
+</body>
+</html>
