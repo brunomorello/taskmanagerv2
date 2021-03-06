@@ -30,6 +30,7 @@ public class Task {
 	@ManyToOne
 	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
+	private String details;
 	
 	public Category getCategory() {
 		return category;
@@ -75,6 +76,12 @@ public class Task {
 	}
 	public void setDueDate(LocalDateTime dueDate) {
 		this.dueDate = dueDate;
+	}
+	public String getDetails() {
+		return details;
+	}
+	public void setDetails(String details) {
+		this.details = details;
 	}
 
 	@Override
