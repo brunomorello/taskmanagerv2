@@ -51,11 +51,4 @@ public class HomeController {
 //		return "home";
 //	}
 	
-	@GetMapping("/home")
-	public ModelAndView home() {
-		List<Task> allTasksByCategory = taskService.getTasksByCategoryNameLike("%study%");
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("tasks", allTasksByCategory);
-		return mv;
-	}
 }
