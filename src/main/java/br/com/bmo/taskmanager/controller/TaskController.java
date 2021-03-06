@@ -2,8 +2,11 @@ package br.com.bmo.taskmanager.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,7 +59,12 @@ public class TaskController {
 	}
 	
 	@PostMapping("new")
-	public ModelAndView newTask(RequestNewTask request) {
+	public ModelAndView newTask(@Valid RequestNewTask request, BindingResult result) {
+		if (result.hasErrors()) {
+			ModelAndView formNew = new ModelAndView("/task/form");
+			return formNew;
+		}
+		
 		ModelAndView mv = new ModelAndView("/home");
 		Task task = request.toTask();
 		taskRepository.save(task);
