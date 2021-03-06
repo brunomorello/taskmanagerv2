@@ -1,32 +1,9 @@
 package br.com.bmo.taskmanager.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
-
-import br.com.bmo.taskmanager.model.Task;
-import br.com.bmo.taskmanager.service.CategoryService;
-import br.com.bmo.taskmanager.service.StatusService;
-import br.com.bmo.taskmanager.service.TaskReportService;
-import br.com.bmo.taskmanager.service.TaskService;
-import br.com.bmo.taskmanager.service.UserService;
 
 @Controller
 public class HomeController {
-	
-	@Autowired
-	private CategoryService categoryService;
-	@Autowired
-	private UserService userService;
-	@Autowired
-	private StatusService statusService;
-	@Autowired
-	private TaskService taskService;
-	@Autowired
-	private TaskReportService taskReportService;
 	
 //	private final CategoryService categoryService;
 //	private final UserService userService;

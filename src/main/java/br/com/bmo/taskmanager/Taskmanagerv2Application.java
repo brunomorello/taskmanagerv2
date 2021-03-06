@@ -82,37 +82,37 @@ public class Taskmanagerv2Application implements CommandLineRunner {
 //		
 //		categoryService.showAllCategories();
 		
-		System.out.println("Finding Users by firstName");
-		userService.listUsersFoundByName("Bru%");
-		
-		System.out.println("Get Tasks Created this Month");
-		Iterable<Task> allTasksByMonth = taskService.getAllTasksByMonth(2);
-		allTasksByMonth.forEach(System.out::println);
-		
-		System.out.println("Select Tasks by Category.name=Studyi");
-		List<Task> allTasksByCategory = taskService.getTasksByCategoryName("Studyi");
-		allTasksByCategory.forEach(System.out::println);
-		
-		System.out.println("Select Tasks by Category.name LIKE %study%");
-		allTasksByCategory = taskService.getTasksByCategoryNameLike("%study%");
-		allTasksByCategory.forEach(System.out::println);
-		
-		System.out.println("Select Tasks based on Due Date using Native Query");
-		List<Task> tasksList = taskService.getTasksByDueDateIsOrGreaterThan("2021-03-01T00:00:00");
-		tasksList.forEach(System.out::println);
-		
-		System.out.println("Select All Tasks at page 0");
-		Iterable<Task> allTasks = taskService.getAllTasks();
-		allTasks.forEach(System.out::println);
-		
-		System.out.println("Select All Tasks - Shows only Description and Status");
-		List<TaskProjection> tasksByDescrAndStatus = taskService.getTaskByDescriptionAndStaus();
-		tasksByDescrAndStatus.forEach(task -> {
-			System.out.println("Task Description: " + task.getDescription() + " - " + task.getStatusName());
-		});
-		
-		System.out.println("Testing Task Report using Specification");
-		taskReportService.execute(null, null, 5, null, null);
+//		System.out.println("Finding Users by firstName");
+//		userService.listUsersFoundByName("Bru%");
+//		
+//		System.out.println("Get Tasks Created this Month");
+//		Iterable<Task> allTasksByMonth = taskService.getAllTasksByMonth(2);
+//		allTasksByMonth.forEach(System.out::println);
+//		
+//		System.out.println("Select Tasks by Category.name=Studyi");
+//		List<Task> allTasksByCategory = taskService.getTasksByCategoryName("Studyi");
+//		allTasksByCategory.forEach(System.out::println);
+//		
+//		System.out.println("Select Tasks by Category.name LIKE %study%");
+//		allTasksByCategory = taskService.getTasksByCategoryNameLike("%study%");
+//		allTasksByCategory.forEach(System.out::println);
+//		
+//		System.out.println("Select Tasks based on Due Date using Native Query");
+//		List<Task> tasksList = taskService.getTasksByDueDateIsOrGreaterThan("2021-03-01T00:00:00");
+//		tasksList.forEach(System.out::println);
+//		
+//		System.out.println("Select All Tasks at page 0");
+//		Iterable<Task> allTasks = taskService.getAllTasks();
+//		allTasks.forEach(System.out::println);
+//		
+//		System.out.println("Select All Tasks - Shows only Description and Status");
+//		List<TaskProjection> tasksByDescrAndStatus = taskService.getTaskByDescriptionAndStaus();
+//		tasksByDescrAndStatus.forEach(task -> {
+//			System.out.println("Task Description: " + task.getDescription() + " - " + task.getStatusName());
+//		});
+//		
+//		System.out.println("Testing Task Report using Specification");
+//		taskReportService.execute(null, null, 5, null, null);
 	}
 
 }
