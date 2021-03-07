@@ -1,46 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-<title>Taskmanager - Categories</title>
-</head>
+<head th:replace="~{base :: head}"></head>
 <body>
+	<nav th:replace="~{base :: nav}"></nav>
+
 	<div class="container">
-		<nav class="navbar navbar-expand navbar-dark bg-dark mb-3">
-			<div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavDropdown">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link active" href="/task/home">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/category/list">Categories</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Users</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Reports</a>
-					</li>
-				</ul>
-				<a href="/task/form"><button class="btn btn-outline-success my-2 my-sm-0 me-2">New</button></a>
-			</div>
-		</nav>
 		<div class="col-sm-5">
-			
 			<a href="/category/form"><button class="btn btn-primary">New Category</button></a>
-			<div class="list-group">
-			  <a th:each="category : ${categoriesList}" href="#" class="list-group-item list-group-item-action" aria-current="true">
-			  	<spam th:text="${category.name}">Category</spam>
-			  </a>
-			</div>			
+			<div class="list-group mt-3">
+				<a th:each="category : ${categoriesList}" href="#" class="list-group-item list-group-item-action" aria-current="true">
+					<spam th:text="${category.name}">Category</spam>
+				</a>
+			</div>
 		</div>
 	</div>
-	
-	<!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+	<script th:replace="~{base :: bootsrapBundle}"></script>
 </body>
 </html>
