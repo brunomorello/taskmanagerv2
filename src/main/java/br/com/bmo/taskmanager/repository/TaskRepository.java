@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import br.com.bmo.taskmanager.model.Status;
 import br.com.bmo.taskmanager.model.Task;
 import br.com.bmo.taskmanager.model.TaskProjection;
 
@@ -31,4 +32,6 @@ public interface TaskRepository extends PagingAndSortingRepository<Task, Integer
 	// 		and could be useful on views to apply projections  
 	@Query(value = "SELECT t.description, s.name as statusName FROM tasks t JOIN status s ON (t.status_id = s.id)", nativeQuery = true)
 	List<TaskProjection> findTaskByDescriptionAndStaus();
+
+	List<Task> findByStatus(Status status);
 }
