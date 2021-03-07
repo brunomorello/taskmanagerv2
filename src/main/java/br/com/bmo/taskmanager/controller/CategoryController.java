@@ -35,16 +35,14 @@ public class CategoryController {
 	}
 	
 	@PostMapping("create")
-	public ModelAndView create(@Valid RequestCategory request, BindingResult result) {
-		ModelAndView mv = new ModelAndView("category/list");
+	public String create(@Valid RequestCategory request, BindingResult result) {
 		
 		if (result.hasErrors()) {
-			ModelAndView categoryFormMv = new ModelAndView("category/form");
-			return categoryFormMv;
+			return "category/form";
 		}
 		
 		Category category = request.parse();
 		categoryRepository.save(category);
-		return mv;
+		return "redirect:/category/list";
 	}
 }
