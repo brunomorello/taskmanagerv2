@@ -61,16 +61,14 @@ public class TaskController {
 	}
 	
 	@PostMapping("new")
-	public ModelAndView newTask(@Valid RequestNewTask request, BindingResult result) {
+	public String newTask(@Valid RequestNewTask request, BindingResult result) {
 		if (result.hasErrors()) {
-			ModelAndView formNew = new ModelAndView("/task/form");
-			return formNew;
+			return "/task/form";
 		}
 		
-		ModelAndView mv = new ModelAndView("/home");
 		Task task = request.toTask();
 		taskRepository.save(task);
-		return mv;
+		return "redirect:/task/home";
 	}
 	
 	@GetMapping("/{status}")
