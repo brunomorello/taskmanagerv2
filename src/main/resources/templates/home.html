@@ -15,7 +15,7 @@
 			</div>
 		</div>
 
-		<div class="col-sm-3 mt-3">
+		<div class="col-sm-4 mt-3">
 			<div class="card text-white bg-secondary mb-3"
 				th:each="task : ${tasks}">
 				<div class="card-header d-flex justify-content-between">
@@ -35,11 +35,15 @@
 					<div class="row">
 						<div class="col-md-5">
 							Category
+						</div>
+						<div class="col-md-5">
 							<spam th:text="${task.category.name}">Category</spam>
 						</div>
 						<div class="col-md-5">
 							Due Date
-							<spam th:text="${task.dueDate}">Due Date</spam>
+						</div>
+						<div class="col-md-5">
+							<spam th:text="${#temporals.format(task.dueDate, 'dd/MMM/yyyy HH:mm')}">Due Date</spam>
 						</div>
 					</div>
 
