@@ -7,4 +7,6 @@ import br.com.bmo.taskmanager.model.Status;
 
 @Repository
 public interface StatusRepository extends CrudRepository<Status, Integer>{
+
+	Status findByName(String name);
 }
