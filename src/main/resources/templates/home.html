@@ -7,8 +7,15 @@
 		<div class="col-sm-5">
 			<div class="card text-white bg-secondary mb-3"
 				th:each="task : ${tasks}">
-				<div class="card-header" th:text="${task.description}">Task
-					Name</div>
+				<div class="card-header d-flex justify-content-between">
+					<span th:text="${task.description}">Task Name</span>
+					<th:block th:switch="${task.status.name}">
+						<span th:case="'Backlog'" class="badge bg-primary" th:text="${task.status.name}">Backlog</span>
+						<span th:case="'In Progress'" class="badge bg-warning text-dark" th:text="${task.status.name}">In Progress</span>
+						<span th:case="'On Hold'" class="badge bg-danger" th:text="${task.status.name}">On Hold</span>
+						<span th:case="'Done'" class="badge bg-success" th:text="${task.status.name}">Done</span>
+					</th:block>
+				</div>
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md-5">
