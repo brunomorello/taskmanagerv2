@@ -7,7 +7,7 @@
 
 		<div class="p-3 mb-2 bg-light">
 			<div class="btn-group">
-				<a th:classappend="${status} == null ? 'text-white active'" href="/task/home" class="btn btn-outline-info" aria-current="page">All</a>
+				<a th:classappend="${status} == null ? 'text-white active'" href="/home" class="btn btn-outline-info" aria-current="page">All</a>
 				<a th:classappend="${status} == 'Backlog' ? 'active'" href="/task/Backlog" class="btn btn-outline-primary" aria-current="page">Backlog</a> 
 				<a th:classappend="${status} == 'In Progress' ? 'active'" href="/task/In Progress" class="btn btn-outline-warning">In Progress</a>
 				<a th:classappend="${status} == 'On Hold' ? 'active'" href="/task/On Hold" class="btn btn-outline-danger">On Hold</a>
