@@ -39,11 +39,10 @@
 			</a> <a class="text-light" href="/login"
 				sec:authorize="!isAuthenticated()">
 				<button class="btn btn-primary my-2 my-sm-0 me-2">Login</button>
-			</a> <a onclick="document.querySelector('#form-logout').submit()"
-				class="text-light" href="#" sec:authorize="isAuthenticated()">
+			</a> <a
+				class="text-light" href="/logout" sec:authorize="isAuthenticated()">
 				<button class="btn btn-danger my-2 my-sm-0 me-2">Logout</button>
 			</a>
-			<form id="form-logout" th:action="@{/logout}" method="post" />
 		</div>
 	</div>
 </nav>
