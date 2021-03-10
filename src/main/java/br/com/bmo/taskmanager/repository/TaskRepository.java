@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import br.com.bmo.taskmanager.model.Status;
 import br.com.bmo.taskmanager.model.Task;
 import br.com.bmo.taskmanager.model.TaskProjection;
+import br.com.bmo.taskmanager.model.User;
 
 @Repository
 public interface TaskRepository extends PagingAndSortingRepository<Task, Integer>, JpaSpecificationExecutor<Task>{
@@ -34,4 +35,5 @@ public interface TaskRepository extends PagingAndSortingRepository<Task, Integer
 	List<TaskProjection> findTaskByDescriptionAndStaus();
 
 	List<Task> findByStatus(Status status);
+	List<Task> findByOwner(User owner);
 }
