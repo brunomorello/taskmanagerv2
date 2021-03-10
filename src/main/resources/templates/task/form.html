@@ -22,7 +22,7 @@
 				<label for="taskOwner">Owner</label>
 				<select class="form-select" name="taskOwner">
 					<option value="0" selected="true">Select</option>
-					<option th:each="user : ${users}" value="0" th:value="${user.id}" th:text="${user.firstName}">Owner</option>
+					<option th:each="user : ${users}" value="0" th:value="${user.username}" th:text="${user.firstName}">Owner</option>
 				</select>
 				<small>Set a Owner</small>
 			</div>
