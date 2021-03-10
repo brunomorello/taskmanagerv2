@@ -22,7 +22,7 @@ public class Task {
 	private LocalDateTime updatedAt;
 	private LocalDateTime dueDate;
 	@ManyToOne
-	@JoinColumn(name = "owner_id", nullable = false)
+	@JoinColumn(name = "owner_username", nullable = false)
 	private User owner;
 	@ManyToOne
 	@JoinColumn(name = "status_id", nullable = false)

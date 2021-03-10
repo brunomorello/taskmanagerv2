@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -14,13 +12,12 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
 	private String firstName;
 	private String lastName;
-	private String login;
-	private String pwd;
+	@Id
+	private String username;
+	private String password;
+	private Boolean enabled;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	@OneToMany(mappedBy = "owner")
@@ -32,29 +29,11 @@ public class User {
 	public void setTask(List<Task> task) {
 		this.task = task;
 	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	public String getLastName() {
 		return lastName;
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-	public String getLogin() {
-		return login;
-	}
-	public void setLogin(String login) {
-		this.login = login;
-	}
-	public String getPwd() {
-		return pwd;
-	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
 	}
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
@@ -74,10 +53,27 @@ public class User {
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public Boolean getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", login=" + login
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", username=" + username + ", enabled="
+				+ enabled + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", task=" + task + "]";
 	}
-	
 }
