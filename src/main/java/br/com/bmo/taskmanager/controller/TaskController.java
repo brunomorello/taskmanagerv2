@@ -1,5 +1,6 @@
 package br.com.bmo.taskmanager.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -24,7 +25,6 @@ import br.com.bmo.taskmanager.repository.CategoryRepository;
 import br.com.bmo.taskmanager.repository.StatusRepository;
 import br.com.bmo.taskmanager.repository.TaskRepository;
 import br.com.bmo.taskmanager.repository.UserRepository;
-import br.com.bmo.taskmanager.service.TaskService;
 
 @Controller
 @RequestMapping("task")
@@ -38,10 +38,8 @@ public class TaskController {
 	private UserRepository userRepository;
 	@Autowired
 	private StatusRepository statusRepository; 
-	@Autowired
-	private TaskService taskService;
-
 	@GetMapping("form")
+	
 	public ModelAndView form() {
 		ModelAndView mv = new ModelAndView("task/form");
 		Iterable<Category> categories = categoryRepository.findAll();
@@ -61,12 +59,13 @@ public class TaskController {
 		
 		Task task = request.toTask();
 		taskRepository.save(task);
-		return "redirect:/task/home";
+		return "redirect:/home";
 	}
 	
 	@GetMapping("/{status}")
-	public String taskStatus(@PathVariable("status") String status, Model model) {
-		List<Task> tasks = taskRepository.findByStatus(statusRepository.findByName(status));
+	public String taskStatus(@PathVariable("status") String status, Model model, Principal principal) {
+		User user = userRepository.findByUsername(principal.getName());
+		List<Task> tasks = taskRepository.findByStatusAndOwner(statusRepository.findByName(status), user);
 		model.addAttribute("tasks", tasks);
 		model.addAttribute("status", status);
 		return "home";
@@ -74,6 +73,6 @@ public class TaskController {
 	
 	@ExceptionHandler(IllegalArgumentException.class)
 	public String onError() {
-		return "redirect:/task/home";
+		return "redirect:/home";
 	}
 }

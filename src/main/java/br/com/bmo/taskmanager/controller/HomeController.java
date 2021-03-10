@@ -1,11 +1,11 @@
 package br.com.bmo.taskmanager.controller;
 
-import java.util.List;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import br.com.bmo.taskmanager.model.Task;
 import br.com.bmo.taskmanager.service.TaskService;
@@ -40,11 +40,10 @@ public class HomeController {
 	private TaskService taskService;
 	
 	@GetMapping("/home")
-	public ModelAndView home() {
-		List<Task> allTasksByCategory = taskService.getTasksByCategoryNameLike("%study%");
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("tasks", allTasksByCategory);
-		return mv;
+	public String home(Model model, Principal principal) {
+		Iterable<Task> allTasksByLoggedUser = taskService.getAllTasksByOwner(principal.getName());
+		model.addAttribute("tasks", allTasksByLoggedUser);
+		return "home";
 	}
 	
 }

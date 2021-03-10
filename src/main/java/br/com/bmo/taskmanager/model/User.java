@@ -3,7 +3,9 @@ package br.com.bmo.taskmanager.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +22,7 @@ public class User {
 	private Boolean enabled;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
-	@OneToMany(mappedBy = "owner")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.LAZY)
 	private List<Task> task;
 	
 	public List<Task> getTask() {
