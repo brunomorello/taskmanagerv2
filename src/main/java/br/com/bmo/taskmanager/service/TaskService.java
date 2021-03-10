@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.bmo.taskmanager.model.Task;
 import br.com.bmo.taskmanager.model.TaskProjection;
+import br.com.bmo.taskmanager.model.User;
 import br.com.bmo.taskmanager.repository.TaskRepository;
 
 @Service
@@ -43,6 +44,12 @@ public class TaskService {
 		System.out.println("Current Page " + allTasksList.getNumber());
 		System.out.println("Total " + allTasksList.getTotalElements());
 		return allTasksList;
+	}
+	
+	public Iterable<Task> getAllTasksByOwner(String username) {
+		User user = new User();
+		user.setUsername(username);
+		return taskRepository.findByOwner(user);
 	}
 	
 	public Iterable<Task> getAllTasksByMonth(Integer month) {
