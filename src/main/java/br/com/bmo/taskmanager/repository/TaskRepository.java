@@ -34,6 +34,7 @@ public interface TaskRepository extends PagingAndSortingRepository<Task, Integer
 	@Query(value = "SELECT t.description, s.name as statusName FROM tasks t JOIN status s ON (t.status_id = s.id)", nativeQuery = true)
 	List<TaskProjection> findTaskByDescriptionAndStaus();
 
+	List<Task> findByStatusAndOwner(Status status, User owner);
 	List<Task> findByStatus(Status status);
 	List<Task> findByOwner(User owner);
 }
