@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import br.com.bmo.taskmanager.model.User;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer>{
+public interface UserRepository extends CrudRepository<User, String>{
 	List<User> findByFirstNameLike(String firstName);
+	User findByUsername(String username);
 }
