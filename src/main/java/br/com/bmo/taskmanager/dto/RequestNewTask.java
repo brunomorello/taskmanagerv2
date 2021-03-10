@@ -69,7 +69,7 @@ public class RequestNewTask {
 		task.setCategory(category);
 		
 		User user = new User();
-		user.setId(Integer.valueOf(getTaskOwner()));
+		user.setUsername(getTaskOwner());
 		task.setOwner(user);
 		
 		Status status = new Status();
