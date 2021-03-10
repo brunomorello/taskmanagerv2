@@ -24,15 +24,26 @@
 	<div
 		class="container collapse navbar-collapse d-flex justify-content-between"
 		id="navbarNavDropdown">
-		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link active"
-				href="/task/home">Home</a></li>
+		<a class="navbar-brand" href="/home">Taskmanager</a>
+		<ul class="navbar-nav" sec:authorize="isAuthenticated()">
+			<li class="nav-item"><a class="nav-link active" href="/home">Home</a></li>
 			<li class="nav-item"><a class="nav-link" href="/category/list">Categories</a>
 			</li>
 			<li class="nav-item"><a class="nav-link" href="#">Users</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
 		</ul>
-		<a href="/task/form"><button
-				class="btn btn-success my-2 my-sm-0 me-2">New Task</button></a>
+
+		<div class="d-flex">
+			<a href="/task/form" sec:authorize="isAuthenticated()">
+				<button class="btn btn-success my-2 my-sm-0 me-2">New Task</button>
+			</a> <a class="text-light" href="/login"
+				sec:authorize="!isAuthenticated()">
+				<button class="btn btn-primary my-2 my-sm-0 me-2">Login</button>
+			</a> <a onclick="document.querySelector('#form-logout').submit()"
+				class="text-light" href="#" sec:authorize="isAuthenticated()">
+				<button class="btn btn-danger my-2 my-sm-0 me-2">Logout</button>
+			</a>
+			<form id="form-logout" th:action="@{/logout}" method="post" />
+		</div>
 	</div>
 </nav>
