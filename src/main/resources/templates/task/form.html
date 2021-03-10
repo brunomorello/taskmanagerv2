@@ -4,7 +4,7 @@
 <body>
 	<nav th:replace="~{base :: nav}"></nav>
 	<div class="container">
-		<form action="/task/new" method="POST">
+		<form th:action="@{/task/new}" method="POST">
 			<div class="form-group">
 				<label for="taskDesc">Short Description</label>
 				<input class="form-control" name="taskDesc" placeholder="Task Short Description" />
