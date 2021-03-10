@@ -40,14 +40,6 @@ public class TaskController {
 	private StatusRepository statusRepository; 
 	@Autowired
 	private TaskService taskService;
-	
-	@GetMapping("/home")
-	public ModelAndView home() {
-		List<Task> allTasksByCategory = taskService.getTasksByCategoryNameLike("%study%");
-		ModelAndView mv = new ModelAndView("home");
-		mv.addObject("tasks", allTasksByCategory);
-		return mv;
-	}
 
 	@GetMapping("form")
 	public ModelAndView form() {

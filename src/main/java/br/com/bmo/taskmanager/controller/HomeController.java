@@ -1,6 +1,14 @@
 package br.com.bmo.taskmanager.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import br.com.bmo.taskmanager.model.Task;
+import br.com.bmo.taskmanager.service.TaskService;
 
 @Controller
 public class HomeController {
@@ -27,5 +35,16 @@ public class HomeController {
 //		model.addAttribute("tasks", allTasksByCategory);
 //		return "home";
 //	}
+	
+	@Autowired
+	private TaskService taskService;
+	
+	@GetMapping("/home")
+	public ModelAndView home() {
+		List<Task> allTasksByCategory = taskService.getTasksByCategoryNameLike("%study%");
+		ModelAndView mv = new ModelAndView("home");
+		mv.addObject("tasks", allTasksByCategory);
+		return mv;
+	}
 	
 }
