@@ -1,7 +1,8 @@
 <!-- head -->
-<head th:fragment="head">
+<head th:fragment="head(title)">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title th:text="${title + ' | Taskmanager'}">Taskmanager</title>
 
 <!-- Bootstrap CSS -->
 <link
@@ -9,7 +10,6 @@
 	rel="stylesheet"
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
 	crossorigin="anonymous">
-<title>Taskmanager</title>
 </head>
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
