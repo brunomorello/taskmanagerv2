@@ -3,6 +3,7 @@ package br.com.bmo.taskmanager.controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,7 @@ public class HomeController {
 	
 	@GetMapping("/home")
 	public String home(Model model, Principal principal) {
+		Sort sort = Sort.by("createdAt").descending();
 		Iterable<Task> allTasksByLoggedUser = taskService.getAllTasksByOwner(principal.getName());
 		model.addAttribute("tasks", allTasksByLoggedUser);
 		return "home";

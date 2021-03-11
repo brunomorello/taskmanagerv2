@@ -47,9 +47,11 @@ public class TaskService {
 	}
 	
 	public Iterable<Task> getAllTasksByOwner(String username) {
+		Sort createdAtDescSort = Sort.by("createdAt").descending();
+		PageRequest pagination = PageRequest.of(0, 10, createdAtDescSort);
 		User user = new User();
 		user.setUsername(username);
-		return taskRepository.findByOwner(user);
+		return taskRepository.findByOwner(user, pagination);
 	}
 	
 	public Iterable<Task> getAllTasksByMonth(Integer month) {
