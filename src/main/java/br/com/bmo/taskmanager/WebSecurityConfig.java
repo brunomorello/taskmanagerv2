@@ -33,7 +33,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.defaultSuccessUrl("/home", true)
 					.permitAll()
 				)
-				.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")))
+				.logout(logout -> logout
+						.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+						.logoutSuccessUrl("/home")
+				)
 				.csrf().disable();
 	}
 	
