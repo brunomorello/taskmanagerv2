@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 import br.com.bmo.taskmanager.model.Category;
 import br.com.bmo.taskmanager.model.Status;
@@ -18,6 +19,7 @@ import br.com.bmo.taskmanager.service.TaskReportService;
 import br.com.bmo.taskmanager.service.TaskService;
 import br.com.bmo.taskmanager.service.UserService;
 
+@EnableCaching
 @SpringBootApplication
 public class Taskmanagerv2Application implements CommandLineRunner {
 	
