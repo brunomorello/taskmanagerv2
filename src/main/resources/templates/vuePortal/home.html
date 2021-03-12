@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{base :: head('Categories')}">
+</head>
+<body onload="onLoad()">
+	<nav th:replace="~{base :: nav}"></nav>
+	<div class="container" id="taskmanagerCategoryApp">
+		<div class="col-sm-5">
+			<a href="/category/form">
+				<button class="btn btn-primary">{{ message }}</button>
+			</a>
+			<div class="list-group mt-3">
+				<a v-for="category in categoriesList" href="#"
+					class="list-group-item list-group-item-action" aria-current="true">
+					<spam>{{ category.name }}</spam>
+				</a>
+			</div>
+		</div>
+	</div>
+	<script>
+		function onLoad() {
+			var app = new Vue({
+				el: "#taskmanagerCategoryApp",
+				data: {
+					message: 'Not Available',
+					categoriesList: [ ] 
+				},
+				mounted () {
+					axios
+				      .get('http://localhost:8080/api/categories/')
+				      .then(response => (this.categoriesList = response.data))
+				}
+			});
+		}
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script th:replace="~{base :: bootsrapBundle}"></script>
+</body>
+</html>
