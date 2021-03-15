@@ -74,7 +74,11 @@
 								username: user.username,
 								password: user.password
 							})
-							.then(resp => console.log(resp))
+							.then(resp => {
+								console.log(resp);
+								if (resp.request.status == 200)
+									console.log('success!!');
+							})
 							.catch(error => {
 								console.log(error.response.data.errors);
 								error.response.data.errors.forEach(error => {
