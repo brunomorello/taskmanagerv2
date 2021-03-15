@@ -20,8 +20,8 @@ public class User {
 	private String username;
 	private String password;
 	private Boolean enabled;
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
+	private LocalDateTime createdAt = LocalDateTime.now();
+	private LocalDateTime updatedAt = LocalDateTime.now();
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.LAZY)
 	private List<Task> task;
 	
@@ -51,10 +51,7 @@ public class User {
 	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-	}
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
+	}	
 	public String getUsername() {
 		return username;
 	}
