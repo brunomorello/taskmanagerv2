@@ -2,6 +2,7 @@ package br.com.bmo.taskmanager.dto;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.com.bmo.taskmanager.model.User;
@@ -15,6 +16,7 @@ public class RequestNewUser {
 	@NotNull
 	private String username;
 	@NotNull
+	@Length(min = 6, max = 50)
 	private String password;
 	
 	public String getFirstName() {

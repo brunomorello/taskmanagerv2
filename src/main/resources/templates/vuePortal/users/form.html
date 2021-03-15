@@ -8,20 +8,32 @@
 			<h3>New User</h3>
 			<div class="col-6">
 				<label for ="firstName" class="form-label">First Name</label>
-				<input type="text" class="form-control" v-model="user.firstName" />
+				<input type="text" class="form-control" v-model="user.firstName" v-bind:class="{'is-invalid': userErrors.firstName !== ''}" />
+				<div v-if="userErrors.firstName" class="invalid-feedback">
+					{{userErrors.firstName}}
+				</div>
 			</div>
 			<div class="col-6">
-				<label for ="lastName" class="form-label">Last Name</label>
-				<input type="text" class="form-control" v-model="user.lastName" />
+				<label for="lastName" class="form-label">Last Name</label>
+				<input type="text" class="form-control" v-model="user.lastName" v-bind:class="{'is-invalid': userErrors.lastName !== ''}" />
+				<div v-if="userErrors.lastName" class="invalid-feedback">
+					{{userErrors.lastName}}
+				</div>
 			</div>
 			<div class="col-6">
 				<label for ="username" class="form-label">Username</label>
-				<input type="text" class="form-control" v-model="user.username" />
+				<input type="text" class="form-control" v-model="user.username" v-bind:class="{'is-invalid': userErrors.username !== ''}" />
+				<div v-if="userErrors.username" class="invalid-feedback">
+					{{userErrors.username}}
+				</div>
 			</div>
 			
 			<div class="col-6">
 				<label for="password" class="form-label">Password</label>
-				<input type="password" class="form-control" v-model="user.password" />
+				<input type="password" class="form-control" v-model="user.password" v-bind:class="{'is-invalid': userErrors.password !== ''}" />
+				<div v-if="userErrors.password" class="invalid-feedback">
+					{{userErrors.password}}
+				</div>
 			</div>
 
 			<button v-on:click="createUser(user)" class="btn btn-primary mt-2">Criar</button>
@@ -33,7 +45,13 @@
 				el: "#taskmanagerUserApp",
 				data: {
 					message: 'Not Available',
-					users: [{}],
+					users: [ {} ],
+					userErrors: {
+						firstName: '',
+						lastName: '',
+						username: '',
+						password: ''
+					}
 				},
 				mounted () {
 					axios
@@ -42,6 +60,13 @@
 				},
 				methods: {
 					createUser: function (user) {
+						this.userErrors = {
+							firstName: '',
+							lastName: '',
+							username: '',
+							password: ''
+						}
+				
 						axios
 							.post('http://localhost:8080/api/users/', {
 								firstName: user.firstName,
@@ -50,6 +75,12 @@
 								password: user.password
 							})
 							.then(resp => console.log(resp))
+							.catch(error => {
+								console.log(error.response.data.errors);
+								error.response.data.errors.forEach(error => {
+									this.userErrors[error.field] = error.defaultMessage;
+								})
+							})
 					}
 				}
 			});
