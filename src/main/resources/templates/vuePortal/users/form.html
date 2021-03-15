@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{base :: head('User Form')}"></head>
+<body onLoad="onLoad()">
+	<nav th:replace="~{base :: nav}"></nav>
+	<div class="container" id="taskmanagerUserApp">
+		<div class="row" v-for="user in users">
+			<h3>New User</h3>
+			<div class="col-6">
+				<label for ="firstName" class="form-label">First Name</label>
+				<input type="text" class="form-control" v-model="user.firstName" />
+			</div>
+			<div class="col-6">
+				<label for ="lastName" class="form-label">Last Name</label>
+				<input type="text" class="form-control" v-model="user.lastName" />
+			</div>
+			<div class="col-6">
+				<label for ="username" class="form-label">Username</label>
+				<input type="text" class="form-control" v-model="user.username" />
+			</div>
+			
+			<div class="col-6">
+				<label for="password" class="form-label">Password</label>
+				<input type="password" class="form-control" v-model="user.password" />
+			</div>
+
+			<button v-on:click="createUser(user)" class="btn btn-primary mt-2">Criar</button>
+		</div>
+	</div>
+	<script>
+		function onLoad() {
+			var app = new Vue({
+				el: "#taskmanagerUserApp",
+				data: {
+					message: 'Not Available',
+					users: [{}],
+				},
+				mounted () {
+					axios
+				      .get('http://localhost:8080/api/users/')
+				      .then(response => (this.categoriesList = response.data))
+				},
+				methods: {
+					createUser: function (user) {
+						axios
+							.post('http://localhost:8080/api/users/', {
+								firstName: user.firstName,
+								lastName: user.lastName,
+								username: user.username,
+								password: user.password
+							})
+							.then(resp => console.log(resp))
+					}
+				}
+			});
+		}
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script th:replace="~{base :: bootsrapBundle}"></script>
+</body>
+</html>
