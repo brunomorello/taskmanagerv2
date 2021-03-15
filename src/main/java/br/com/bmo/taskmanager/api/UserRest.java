@@ -3,6 +3,7 @@ package br.com.bmo.taskmanager.api;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,9 +27,9 @@ public class UserRest {
 	}
 	
 	@PostMapping("/")
-	public User createUser(@Valid @RequestBody RequestNewUser request) {
+	public ResponseEntity<User> createUser(@Valid @RequestBody RequestNewUser request) {
 		User user = request.toUser();
 		userRepository.save(user);
-		return user;
+		return ResponseEntity.ok().body(user);
 	}
 }
