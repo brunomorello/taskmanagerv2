@@ -12,4 +12,9 @@ public class VuePortalController {
 	public String listCategories() {
 		return "vuePortal/home";
 	}
+	
+	@GetMapping("/users/form")
+	public String userForm() {
+		return "vuePortal/users/form";
+	}
 }
