@@ -6,15 +6,59 @@
 
 	<div class="container">
 		<div class="col-sm-5">
-			<a href="/category/form"><button class="btn btn-primary">New Category</button></a>
-			<div class="list-group mt-3">
-				<a th:each="category : ${categoriesList}" href="#" class="list-group-item list-group-item-action" aria-current="true">
+			<a href="/categories/form">
+				<button class="btn btn-primary btn-sm">New Category</button>
+			</a>
+			
+			<ul class="list-group mt-3">
+				<li th:each="category : ${categoriesList}" href="#" class="list-group-item list-group-item-action" aria-current="true">
 					<spam th:text="${category.name}">Category</spam>
-				</a>
-			</div>
+					<a th:href="@{'/categories/form/' + ${category.id}}">
+						<button type="button" class="btn btn-primary btn-sm float-end">
+							<i class="bi bi-pencil"></i>
+						</button>
+					</a>					
+					<button type="button" class="btn btn-danger btn-sm float-end" th:attr="data-bs-categoryId=${category.id},data-bs-categoryName=${category.name}"data-bs-toggle="modal" data-bs-target="#deleteCategory">
+						<i class="bi bi-trash"></i>
+					</button>
+				</li>
+			</ul>
 		</div>
 	</div>
 
+	<!-- Modal -->
+	<div class="modal fade" id="deleteCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <form th:object="${requestCategory}" action="/categories/" method="delete">
+		      <div class="modal-body">
+		        <input type="hidden" name="categoryId">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-danger">Delete</button>
+		      </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>	
+
 	<script th:replace="~{base :: bootsrapBundle}"></script>
+	<script>
+		var deleteCategoryModal = document.getElementById('deleteCategory');
+		deleteCategoryModal.addEventListener('show.bs.modal', (event) => {
+			var btnDelete = event.relatedTarget;
+			var categoryId = btnDelete.getAttribute('data-bs-categoryId');
+			var categoryName = btnDelete.getAttribute('data-bs-categoryName');
+			
+			var modalTitle = deleteCategoryModal.querySelector('.modal-title');
+			var modalBodyInput = deleteCategoryModal.querySelector('.modal-body input');
+			
+			modalTitle.textContent = `Delete ${categoryName}, are you sure?`;
+			modalBodyInput.value = categoryId;
+		});
+	</script>
 </body>
 </html>
