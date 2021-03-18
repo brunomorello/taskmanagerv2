@@ -4,16 +4,23 @@
 <body>
 	<nav th:replace="~{base :: nav}"></nav>
 	<div class="container">
-		<form th:object="${requestCategory}" action="/category/create" method="POST">
+		<form th:object="${requestCategory}" action="/categories/" method="POST">
 			<div class="form-group">
+				<input th:if="${category != null}" name="categoryId" type="hidden" th:value="${category.id}">
 				<label for="categoryName">Name</label>
-				<input th:field="*{categoryName}" th:errorClass="is-invalid" class="form-control" placeholder="Give name to Category" />
+				
+				<!--  <input th:field="*{categoryName}" th:value="${category.name}" th:errorClass="is-invalid" class="form-control" placeholder="Give name to Category" /> -->
+				
+				<input th:if="${category !=null}" name="categoryName" th:value="${category.name}" th:errorClass="is-invalid" class="form-control" placeholder="Give name to Category" />
+				<input th:if="${category ==null}" th:field="*{categoryName}" th:errorClass="is-invalid" class="form-control" placeholder="Give name to Category" />
 				<div th:errors="*{categoryName}" class="invalid-feedback">
 				</div>
 			</div>
 			
-			<button class="btn btn-primary" type="submit">Create Category</button>
+			<button th:if="${category == null}" class="btn btn-primary mt-3" type="submit">Create Category</button>
+			<button th:if="${category != null}" class="btn btn-primary mt-3" type="submit">Update Category</button>
 		</form>
+		<a href="/categories/" class="link-primary mt-2">Back to list</a>
 	</div>
 
 	<script th:replace="~{base :: bootsrapBundle}"></script>
