@@ -58,4 +58,18 @@ public class CategoryController {
 		return "redirect:/categories/";
 	}
 	
+	@PostMapping("/delete")
+	public String deleteCategory(RequestCategory request, Model model) {
+		Optional<Category> category = categoryRepository.findById(Integer.valueOf(request.getCategoryId()));
+		if (category.isPresent()) {
+			try {
+				categoryRepository.deleteById(category.get().getId());				
+			} catch (Exception e) {
+				model.addAttribute("deleteError", e.getMessage());
+				return "category/list";
+			}
+		}
+		return "redirect:/categories/";
+	}
+	
 }

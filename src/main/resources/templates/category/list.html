@@ -10,6 +10,8 @@
 				<button class="btn btn-primary btn-sm">New Category</button>
 			</a>
 			
+			<p th:text="${deleteError}">Error</p>
+			
 			<ul class="list-group mt-3">
 				<li th:each="category : ${categoriesList}" href="#" class="list-group-item list-group-item-action" aria-current="true">
 					<spam th:text="${category.name}">Category</spam>
@@ -34,11 +36,11 @@
 	        <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	      <form th:object="${requestCategory}" action="/categories/" method="delete">
+	      <form th:object="${requestCategory}" th:action="@{/categories/delete}" method="post">
 		      <div class="modal-body">
 		        <input type="hidden" name="categoryId">
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-danger">Delete</button>
+		        <button type="submit" class="btn btn-danger">Delete</button>
 		      </div>
 	      </form>
 	    </div>
