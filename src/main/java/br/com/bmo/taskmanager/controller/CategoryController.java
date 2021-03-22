@@ -48,7 +48,6 @@ public class CategoryController {
 	
 	@PostMapping("/")
 	public String saveCategory(@Valid RequestCategory request, BindingResult result) {
-		
 		if (result.hasErrors()) {
 			return "category/form";
 		}
