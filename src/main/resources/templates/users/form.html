@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{base :: head('Category')}"></head>
+<body>
+	<nav th:replace="~{base :: nav}"></nav>
+	<div class="container">
+		<form th:object="${requestNewUser}" action="/users/" method="POST">
+			<div class="form-group">
+				
+				<label for="username">Username</label>
+				<input th:field="*{firstName}" th:value="*{firstName}" th:errorClass="is-invalid" class="form-control" placeholder="username" />
+				<div th:errors="*{firstName}" class="invalid-feedback"></div>
+				
+				<label for="firstName">First Name</label>
+				<input th:if="${user != null}" name="firstName" th:value="${category.name}" th:errorClass="is-invalid" class="form-control" placeholder="first name" />
+				<input th:if="${user == null}" th:field="*{firstName}" th:errorClass="is-invalid" class="form-control" placeholder="first name" />
+				<div th:errors="*{firstName}" class="invalid-feedback">
+				</div>
+			</div>
+			
+			<button th:if="${user == null}" class="btn btn-primary mt-3" type="submit">Create User</button>
+			<button th:if="${user != null}" class="btn btn-primary mt-3" type="submit">Update User</button>
+		</form>
+		<a href="/users/" class="link-primary mt-2">Back to list</a>
+	</div>
+
+	<script th:replace="~{base :: bootsrapBundle}"></script>
+</body>
+</html>
