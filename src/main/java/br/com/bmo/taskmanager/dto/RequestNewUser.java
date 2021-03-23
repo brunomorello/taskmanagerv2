@@ -1,5 +1,6 @@
 package br.com.bmo.taskmanager.dto;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -9,13 +10,13 @@ import br.com.bmo.taskmanager.model.User;
 
 public class RequestNewUser {
 
-	@NotNull
+	@NotBlank
 	private String firstName;
-	@NotNull
+	@NotBlank
 	private String lastName;
-	@NotNull
+	@NotBlank
 	private String username;
-	@NotNull
+	@NotBlank
 	@Length(min = 6, max = 50)
 	private String password;
 	
