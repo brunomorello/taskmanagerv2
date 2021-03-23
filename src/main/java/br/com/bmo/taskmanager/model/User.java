@@ -1,12 +1,18 @@
 package br.com.bmo.taskmanager.model;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,10 +22,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "users")
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
 	private String firstName;
 	private String lastName;
-	@Id
 	private String username;
+	private String email;
 	private String password;
 	private Boolean enabled;
 	private LocalDateTime createdAt = LocalDateTime.now();
@@ -27,6 +37,14 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Task> task;
+	
+	@ManyToMany
+	@JoinTable(
+			name = "users_roles", 
+			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = " id")
+	)
+	private Collection<Role> roles;
 	
 	public List<Task> getTask() {
 		return task;
@@ -72,6 +90,24 @@ public class User {
 	}
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
 	}
 	@Override
 	public String toString() {
