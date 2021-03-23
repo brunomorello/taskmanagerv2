@@ -4,18 +4,25 @@
 <body>
 	<nav th:replace="~{base :: nav}"></nav>
 	<div class="container">
-		<form th:object="${requestNewUser}" action="/users/" method="POST">
+		<form th:object="${requestNewUser}" th:action="@{/users/}" method="POST">
 			<div class="form-group">
-				
 				<label for="username">Username</label>
-				<input th:field="*{firstName}" th:value="*{firstName}" th:errorClass="is-invalid" class="form-control" placeholder="username" />
-				<div th:errors="*{firstName}" class="invalid-feedback"></div>
+				<input th:field="*{username}" th:errorClass="is-invalid" class="form-control" placeholder="username" />
+				<div th:errors="*{username}" class="invalid-feedback"></div>
 				
 				<label for="firstName">First Name</label>
-				<input th:if="${user != null}" name="firstName" th:value="${category.name}" th:errorClass="is-invalid" class="form-control" placeholder="first name" />
+				<input th:if="${user != null}" name="firstName" th:value="${user.firstName}" th:errorClass="is-invalid" class="form-control" placeholder="first name" />
 				<input th:if="${user == null}" th:field="*{firstName}" th:errorClass="is-invalid" class="form-control" placeholder="first name" />
-				<div th:errors="*{firstName}" class="invalid-feedback">
-				</div>
+				<div th:errors="*{firstName}" class="invalid-feedback"></div>
+				
+				<label for="lastName">Last Name</label>
+				<input th:if="${user != null}" name="lastName" th:value="${user.lastName}" th:errorClass="is-invalid" class="form-control" placeholder="last name" />
+				<input th:if="${user == null}" th:field="*{lastName}" th:errorClass="is-invalid" class="form-control" placeholder="last name" />
+				<div th:errors="*{lastName}" class="invalid-feedback"></div>
+				
+				<label for="password">Password</label>
+				<input type="password" th:field="*{password}" th:errorClass="is-invalid" class="form-control" placeholder="password" />
+				<div th:errors="*{password}" class="invalid-feedback"></div>
 			</div>
 			
 			<button th:if="${user == null}" class="btn btn-primary mt-3" type="submit">Create User</button>
