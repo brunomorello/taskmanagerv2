@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "status")
 public class Status {
@@ -17,6 +19,7 @@ public class Status {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	@JsonIgnore
 	@OneToMany(mappedBy = "status")
 	private List<Task> task;
 	
