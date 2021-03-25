@@ -1,8 +1,11 @@
 package br.com.bmo.taskmanager.controller.dto;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import br.com.bmo.taskmanager.model.Category;
 import br.com.bmo.taskmanager.model.Status;
@@ -16,11 +19,11 @@ public class TaskDTO {
 	private Status status;
 	private Category category;
 	private String owner;
-	private String createdAt;
-	private String updatedAt;
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
 	
 	public TaskDTO(Integer id, String description, String details, Status status, Category category, String owner,
-			String createdAt, String updatedAt) {
+			LocalDateTime createdAt, LocalDateTime updatedAt) {
 		this.id = id;
 		this.description = description;
 		this.details = details;
@@ -30,69 +33,37 @@ public class TaskDTO {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
-
+	
 	public Integer getId() {
 		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public String getDetails() {
 		return details;
-	}
-
-	public void setDetails(String details) {
-		this.details = details;
 	}
 
 	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
 	public Category getCategory() {
 		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
 	}
 
 	public String getOwner() {
 		return owner;
 	}
 
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
-
-	public String getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public String getUpdatedAt() {
+	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
-	}
-
-	public void setUpdatedAt(String updatedAt) {
-		this.updatedAt = updatedAt;
 	}
 
 	public static List<TaskDTO> toList(Iterable<Task> findAll) {
@@ -106,10 +77,14 @@ public class TaskDTO {
 						task.getStatus(), 
 						task.getCategory(), 
 						task.getOwner().getUsername(), 
-						task.getCreatedAt().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME), 
-						(task.getUpdatedAt() != null) ? task.getUpdatedAt().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) : "")
+						task.getCreatedAt(), 
+						task.getUpdatedAt())
 					);
 		});
+		// Trying java 8 - no success
+//		List<Task> result = StreamSupport.stream(findAll.spliterator(), false)
+//				.collect(Collectors.toList());
+//		return result.stream().map(TaskDTO::new).collect(Collectors.toList());
 		return parsedTasksList;
 	}
 
