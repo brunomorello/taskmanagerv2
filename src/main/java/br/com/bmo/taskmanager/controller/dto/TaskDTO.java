@@ -1,11 +1,8 @@
 package br.com.bmo.taskmanager.controller.dto;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import br.com.bmo.taskmanager.model.Category;
 import br.com.bmo.taskmanager.model.Status;
@@ -19,11 +16,11 @@ public class TaskDTO {
 	private Status status;
 	private Category category;
 	private String owner;
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
+	private String createdAt;
+	private String updatedAt;
 	
 	public TaskDTO(Integer id, String description, String details, Status status, Category category, String owner,
-			LocalDateTime createdAt, LocalDateTime updatedAt) {
+			String createdAt, String updatedAt) {
 		this.id = id;
 		this.description = description;
 		this.details = details;
@@ -58,15 +55,15 @@ public class TaskDTO {
 		return owner;
 	}
 
-	public LocalDateTime getCreatedAt() {
+	public String getCreatedAt() {
 		return createdAt;
 	}
 
-	public LocalDateTime getUpdatedAt() {
+	public String getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public static List<TaskDTO> toList(Iterable<Task> findAll) {
+	public static List<TaskDTO> toList(List<Task> findAll) {
 		List<TaskDTO> parsedTasksList = new ArrayList<>();
 		findAll.forEach(task -> {
 			parsedTasksList.add(
@@ -77,8 +74,8 @@ public class TaskDTO {
 						task.getStatus(), 
 						task.getCategory(), 
 						task.getOwner().getUsername(), 
-						task.getCreatedAt(), 
-						task.getUpdatedAt())
+						task.getCreatedAt().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME), 
+						task.getUpdatedAt() != null ? task.getUpdatedAt().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) : "")
 					);
 		});
 		// Trying java 8 - no success
