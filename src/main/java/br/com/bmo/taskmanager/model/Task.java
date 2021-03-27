@@ -32,6 +32,22 @@ public class Task {
 	private Category category;
 	private String details;
 	
+	public Task() {
+		
+	}
+	
+	public Task(String description, LocalDateTime dueDate, User owner, Status status, Category category,
+			String details) {
+		this.description = description;
+		this.dueDate = dueDate;
+		this.owner = owner;
+		this.status = status;
+		this.category = category;
+		this.details = details;
+	}
+
+
+
 	public Category getCategory() {
 		return category;
 	}
