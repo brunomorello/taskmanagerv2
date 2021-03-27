@@ -3,6 +3,10 @@ package br.com.bmo.taskmanager.controller.dto;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import javax.validation.constraints.NotEmpty;
+
+import com.sun.istack.NotNull;
+
 import br.com.bmo.taskmanager.model.Category;
 import br.com.bmo.taskmanager.model.Status;
 import br.com.bmo.taskmanager.model.Task;
@@ -13,10 +17,14 @@ import br.com.bmo.taskmanager.repository.UserRepository;
 
 public class TaskDTOForm {
 
+	@NotEmpty @NotNull
 	private String description;
 	private String details;
+	@NotEmpty @NotNull
 	private String category;
+	@NotEmpty @NotNull
 	private String status;
+	@NotEmpty @NotNull
 	private String owner;
 	private String dueDate;
 	
