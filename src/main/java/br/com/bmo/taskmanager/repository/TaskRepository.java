@@ -40,4 +40,6 @@ public interface TaskRepository extends PagingAndSortingRepository<Task, Integer
 	List<Task> findByStatus(Status status);
 	List<Task> findByOwner(User owner, Pageable sort);
 	List<Task> findAll(Sort sort);
+	
+	List<Task> findByOwner_Username(String username);
 }
