@@ -8,4 +8,6 @@ import br.com.bmo.taskmanager.model.Category;
 @Repository
 public interface CategoryRepository extends CrudRepository<Category, Integer> {
 
+	Category findByName(String name);
+
 }
