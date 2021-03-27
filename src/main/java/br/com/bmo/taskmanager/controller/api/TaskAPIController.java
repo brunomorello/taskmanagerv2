@@ -19,7 +19,10 @@ public class TaskAPIController {
 	private TaskRepository taskRepository;
 	
 	@GetMapping("/")
-	public List<TaskDTO> getAllTasks() {
-		return TaskDTO.toList(taskRepository.findAll(Sort.by("createdAt").ascending()));
+	public List<TaskDTO> getAllTasks(String username) {
+		if (username == null)
+			return TaskDTO.toList(taskRepository.findAll(Sort.by("createdAt").ascending()));
+		else
+			return TaskDTO.toList(taskRepository.findByOwner_Username(username));
 	}
 }
