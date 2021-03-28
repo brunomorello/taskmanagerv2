@@ -13,6 +13,7 @@ import br.com.bmo.taskmanager.model.Task;
 import br.com.bmo.taskmanager.model.User;
 import br.com.bmo.taskmanager.repository.CategoryRepository;
 import br.com.bmo.taskmanager.repository.StatusRepository;
+import br.com.bmo.taskmanager.repository.TaskAPIRepository;
 import br.com.bmo.taskmanager.repository.UserRepository;
 
 public class TaskDTOForm {
@@ -76,6 +77,23 @@ public class TaskDTOForm {
 				statusObj, 
 				categoryObj, 
 				getDetails());
+	}
+
+	public Task update(Integer id, TaskAPIRepository taskAPIRepository, StatusRepository statusRepository, CategoryRepository categoryRepository, UserRepository userRepository) {
+		Task task = taskAPIRepository.getOne(id);
+		User userObj = userRepository.findByUsername(getOwner());
+		Status statusObj = statusRepository.findByName(getStatus());
+		Category categoryObj = categoryRepository.findByName(getCategory());
+		
+		task.setDescription(getDescription());
+		task.setDetails(getDetails());
+		if (getDueDate() != null)
+			task.setDueDate(LocalDateTime.parse(getDueDate(), DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+		task.setOwner(userObj);
+		task.setStatus(statusObj);
+		task.setCategory(categoryObj);
+		task.setUpdatedAt(LocalDateTime.now());
+		return task;
 	}
 	
 }
