@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,7 @@ import br.com.bmo.taskmanager.controller.dto.TaskDTOForm;
 import br.com.bmo.taskmanager.model.Task;
 import br.com.bmo.taskmanager.repository.CategoryRepository;
 import br.com.bmo.taskmanager.repository.StatusRepository;
+import br.com.bmo.taskmanager.repository.TaskAPIRepository;
 import br.com.bmo.taskmanager.repository.TaskRepository;
 import br.com.bmo.taskmanager.repository.UserRepository;
 
@@ -31,6 +34,8 @@ public class TaskAPIController {
 
 	@Autowired
 	private TaskRepository taskRepository;
+	@Autowired
+	private TaskAPIRepository taskAPIRepository;
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
@@ -81,5 +86,22 @@ public class TaskAPIController {
 				task.getCreatedAt().toString(), 
 				task.getUpdatedAt() != null ? task.getUpdatedAt().toString() : ""
 			);
+	}
+	
+	@PutMapping("/{id}")
+	@Transactional
+	public ResponseEntity<TaskDTO> updateTask(@PathVariable Integer id, @RequestBody @Valid TaskDTOForm form) {
+		Task taskUpdated = form.update(id, taskAPIRepository, statusRepository, categoryRepository, userRepository);
+		return ResponseEntity.ok(
+				new TaskDTO(
+						taskUpdated.getId(),
+						taskUpdated.getDescription(), 
+						taskUpdated.getDetails(),
+						taskUpdated.getStatus(),
+						taskUpdated.getCategory(),
+						taskUpdated.getOwner().getUsername(),
+						taskUpdated.getCreatedAt().toString(),
+						taskUpdated.getUpdatedAt().toString()
+					));
 	}
 }
