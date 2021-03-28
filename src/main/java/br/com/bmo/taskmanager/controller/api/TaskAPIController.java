@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,35 +74,57 @@ public class TaskAPIController {
 	}
 	
 	@GetMapping("/{id}")
-	public TaskDTO taskDetails(@PathVariable Integer id) {
+	public ResponseEntity<TaskDTO> taskDetails(@PathVariable Integer id) {
 		Optional<Task> taskOpt = taskRepository.findById(id);
-		Task task = taskOpt.get();
-		return new TaskDTO(
-				task.getId(), 
-				task.getDescription(), 
-				task.getDetails(), 
-				task.getStatus(), 
-				task.getCategory(), 
-				task.getOwner().getUsername(), 
-				task.getCreatedAt().toString(), 
-				task.getUpdatedAt() != null ? task.getUpdatedAt().toString() : ""
-			);
+		if (taskOpt.isPresent()) {
+			Task task = taskOpt.get();
+			return ResponseEntity.ok(
+				new TaskDTO(
+					task.getId(), 
+					task.getDescription(), 
+					task.getDetails(), 
+					task.getStatus(), 
+					task.getCategory(), 
+					task.getOwner().getUsername(), 
+					task.getCreatedAt().toString(), 
+					task.getUpdatedAt() != null ? task.getUpdatedAt().toString() : ""
+					)
+				);
+		}
+		
+		return ResponseEntity.notFound().build();
 	}
 	
 	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<TaskDTO> updateTask(@PathVariable Integer id, @RequestBody @Valid TaskDTOForm form) {
-		Task taskUpdated = form.update(id, taskAPIRepository, statusRepository, categoryRepository, userRepository);
-		return ResponseEntity.ok(
-				new TaskDTO(
-						taskUpdated.getId(),
-						taskUpdated.getDescription(), 
-						taskUpdated.getDetails(),
-						taskUpdated.getStatus(),
-						taskUpdated.getCategory(),
-						taskUpdated.getOwner().getUsername(),
-						taskUpdated.getCreatedAt().toString(),
-						taskUpdated.getUpdatedAt().toString()
-					));
+		Optional<Task> taskFound = taskAPIRepository.findById(id);
+		if (taskFound.isPresent()) {
+			Task taskUpdated = form.update(id, taskAPIRepository, statusRepository, categoryRepository, userRepository);
+			return ResponseEntity.ok(
+					new TaskDTO(
+							taskUpdated.getId(),
+							taskUpdated.getDescription(), 
+							taskUpdated.getDetails(),
+							taskUpdated.getStatus(),
+							taskUpdated.getCategory(),
+							taskUpdated.getOwner().getUsername(),
+							taskUpdated.getCreatedAt().toString(),
+							taskUpdated.getUpdatedAt().toString()
+							));
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@DeleteMapping("/{id}")
+	@Transactional
+	public ResponseEntity<?> deleteTask(@PathVariable Integer id) {
+		Optional<Task> taskFound = taskAPIRepository.findById(id);
+		if (taskFound.isPresent()) {
+			taskAPIRepository.deleteById(id);
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.notFound().build();
 	}
 }
