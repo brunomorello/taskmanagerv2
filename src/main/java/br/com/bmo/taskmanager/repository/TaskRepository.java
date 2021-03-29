@@ -3,6 +3,7 @@ package br.com.bmo.taskmanager.repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -41,5 +42,5 @@ public interface TaskRepository extends PagingAndSortingRepository<Task, Integer
 	List<Task> findByOwner(User owner, Pageable sort);
 	List<Task> findAll(Sort sort);
 	
-	List<Task> findByOwner_Username(String username);
+	Page<Task> findByOwner_Username(String username, Pageable pageable);
 }
