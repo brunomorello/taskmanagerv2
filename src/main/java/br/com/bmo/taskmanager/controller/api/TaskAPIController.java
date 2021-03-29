@@ -1,14 +1,14 @@
 package br.com.bmo.taskmanager.controller.api;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -45,11 +46,15 @@ public class TaskAPIController {
 	private CategoryRepository categoryRepository;
 	
 	@GetMapping("/")
-	public List<TaskDTO> getAllTasks(String username) {
+	public Page<TaskDTO> getAllTasks(@RequestParam(required = false) String username,
+			@RequestParam int page, @RequestParam int qnt) {
+		
+		PageRequest pageable = PageRequest.of(page, qnt);
+		
 		if (username == null)
-			return TaskDTO.toList(taskRepository.findAll(Sort.by("createdAt").ascending()));
+			return TaskDTO.toList(taskRepository.findAll(pageable));
 		else
-			return TaskDTO.toList(taskRepository.findByOwner_Username(username));
+			return TaskDTO.toList(taskRepository.findByOwner_Username(username, pageable));
 	}
 	
 	@PostMapping("/")
