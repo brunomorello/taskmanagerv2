@@ -37,7 +37,7 @@ public class TaskDTO {
 		this.category = task.getCategory();
 		this.owner = task.getOwner().getUsername();
 		this.createdAt = task.getCreatedAt().toString();
-		this.updatedAt = task.getUpdatedAt().toString();
+		this.updatedAt = task.getUpdatedAt() != null ? task.getUpdatedAt().toString() : "";
 	}
 	
 	
