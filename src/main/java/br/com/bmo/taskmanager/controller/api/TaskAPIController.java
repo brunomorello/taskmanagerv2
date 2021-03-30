@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Order.Direction;
-
 import br.com.bmo.taskmanager.controller.dto.TaskDTO;
 import br.com.bmo.taskmanager.controller.dto.TaskDTOForm;
 import br.com.bmo.taskmanager.model.Task;
@@ -51,14 +49,14 @@ public class TaskAPIController {
 	
 	@GetMapping("/")
 	public Page<TaskDTO> getAllTasks(@RequestParam(required = false) String username,
-			@RequestParam int page, @RequestParam int qnt, @RequestParam String orderByField) {
+			@RequestParam int page, @RequestParam int qnt, @RequestParam String orderBy) {
 		
-		Pageable pageable = PageRequest.of(page, qnt, Sort.by(orderByField));
+		Pageable pagination = PageRequest.of(page, qnt, Sort.by(orderBy));
 		
 		if (username == null)
-			return TaskDTO.toList(taskRepository.findAll(pageable));
+			return TaskDTO.toList(taskAPIRepository.findAll(pagination));
 		else
-			return TaskDTO.toList(taskRepository.findByOwner_Username(username, pageable));
+			return TaskDTO.toList(taskAPIRepository.findByOwner_Username(username, pagination));
 	}
 	
 	@PostMapping("/")

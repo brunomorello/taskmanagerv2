@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 import br.com.bmo.taskmanager.model.Category;
 import br.com.bmo.taskmanager.model.Status;
@@ -19,8 +20,9 @@ import br.com.bmo.taskmanager.service.TaskReportService;
 import br.com.bmo.taskmanager.service.TaskService;
 import br.com.bmo.taskmanager.service.UserService;
 
-@EnableCaching
 @SpringBootApplication
+@EnableCaching
+@EnableSpringDataWebSupport
 public class Taskmanagerv2Application implements CommandLineRunner {
 	
 	private final CategoryService categoryService;
