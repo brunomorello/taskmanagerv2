@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -48,6 +50,7 @@ public class TaskAPIController {
 	private CategoryRepository categoryRepository;
 	
 	@GetMapping("/")
+	@Cacheable(value = "tasksList")
 	public Page<TaskDTO> getAllTasks(@RequestParam(required = false) String username,
 			@RequestParam int page, @RequestParam int qnt, @RequestParam String orderBy) {
 		
@@ -60,6 +63,8 @@ public class TaskAPIController {
 	}
 	
 	@PostMapping("/")
+	@Transactional
+	@CacheEvict(value = "tasksList", allEntries = true)
 	public ResponseEntity<TaskDTO> createTask(@Valid @RequestBody TaskDTOForm form, UriComponentsBuilder uriBuilder) {
 		
 		Task task = form.parse(userRepository, statusRepository, categoryRepository);
@@ -104,6 +109,7 @@ public class TaskAPIController {
 	
 	@PutMapping("/{id}")
 	@Transactional
+	@CacheEvict(value = "tasksList", allEntries = true)
 	public ResponseEntity<TaskDTO> updateTask(@PathVariable Integer id, @RequestBody @Valid TaskDTOForm form) {
 		Optional<Task> taskFound = taskAPIRepository.findById(id);
 		if (taskFound.isPresent()) {
