@@ -51,7 +51,7 @@ public class TaskAPIController {
 	public Page<TaskDTO> getAllTasks(@RequestParam(required = false) String username,
 			@RequestParam int page, @RequestParam int qnt, @RequestParam String orderBy) {
 		
-		Pageable pagination = PageRequest.of(page, qnt, Sort.by(orderBy));
+		Pageable pagination = PageRequest.of(page, qnt, Sort.by(Sort.Direction.ASC, orderBy));
 		
 		if (username == null)
 			return TaskDTO.toList(taskAPIRepository.findAll(pagination));
