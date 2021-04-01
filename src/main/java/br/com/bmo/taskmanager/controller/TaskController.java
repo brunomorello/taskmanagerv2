@@ -2,6 +2,7 @@ package br.com.bmo.taskmanager.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -64,7 +65,8 @@ public class TaskController {
 	
 	@GetMapping("/{status}")
 	public String taskStatus(@PathVariable("status") String status, Model model, Principal principal) {
-		User user = userRepository.findByUsername(principal.getName());
+		Optional<User> userOpt = userRepository.findByUsername(principal.getName());
+		User user = userOpt.get();
 		List<Task> tasks = taskRepository.findByStatusAndOwner(statusRepository.findByName(status), user);
 		model.addAttribute("tasks", tasks);
 		model.addAttribute("status", status);

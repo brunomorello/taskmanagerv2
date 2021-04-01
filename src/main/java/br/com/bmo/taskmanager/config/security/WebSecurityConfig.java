@@ -19,6 +19,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private DataSource dataSource;
+	@Autowired
+	private CustomAuthenticationService custAuthService;
 
 	// Authorization Configs
 	@Override
@@ -45,11 +47,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	// Authentication Configs
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		auth.userDetailsService(custAuthService)
+			.passwordEncoder(new BCryptPasswordEncoder());
 		
-		auth.jdbcAuthentication()
-			.dataSource(dataSource)
-			.passwordEncoder(encoder);
+//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//		
+//		auth.jdbcAuthentication()
+//			.dataSource(dataSource)
+//			.passwordEncoder(encoder);
 	}
 
 	// Statict Resources Configs
