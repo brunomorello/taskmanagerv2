@@ -1,6 +1,6 @@
 package br.com.bmo.taskmanager.config.security;
 
-import javax.sql.DataSource;
+//import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +17,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	@Autowired
-	private DataSource dataSource;
+//	@Autowired
+//	private DataSource dataSource;
 	@Autowired
 	private CustomAuthenticationService custAuthService;
 
@@ -30,6 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.GET, "/api/tasks/*").permitAll()
 			.antMatchers(HttpMethod.GET, "/api/categories/").permitAll()
 			.antMatchers(HttpMethod.GET, "/api/categories/*").permitAll()
+			.antMatchers(HttpMethod.POST, "/auth").permitAll()
 			.anyRequest().authenticated()
 			.and()
 				.formLogin(form -> form
