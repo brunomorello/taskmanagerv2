@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import br.com.bmo.taskmanager.model.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -41,6 +42,15 @@ public class TokenService {
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+
+	public String getUsername(String token) {
+		try {
+			Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+			return claims.getSubject();
+		} catch (Exception e) {
+			return null;
 		}
 	}
 
