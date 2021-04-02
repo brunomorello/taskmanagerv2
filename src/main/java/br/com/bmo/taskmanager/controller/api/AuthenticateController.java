@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bmo.taskmanager.config.security.TokenService;
 import br.com.bmo.taskmanager.controller.dto.AuthForm;
+import br.com.bmo.taskmanager.controller.dto.TokenDTO;
 
 @RestController
 @RequestMapping("/auth")
@@ -33,8 +34,7 @@ public class AuthenticateController {
 			UsernamePasswordAuthenticationToken userAuth = form.parse();
 			Authentication authentication = authManager.authenticate(userAuth);
 			String token = tokenService.generate(authentication);
-			System.out.println(token);
-			return ResponseEntity.ok().build();
+			return ResponseEntity.ok(new TokenDTO(token, "Bearer"));
 			
 		} catch (AuthenticationException e) {
 			return ResponseEntity.badRequest().build();
