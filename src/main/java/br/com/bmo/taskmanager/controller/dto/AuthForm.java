@@ -1,5 +1,7 @@
 package br.com.bmo.taskmanager.controller.dto;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 public class AuthForm {
 
 	private String username;
@@ -27,6 +29,10 @@ public class AuthForm {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public UsernamePasswordAuthenticationToken parse() {
+		return new UsernamePasswordAuthenticationToken(getUsername(), getPassword());
 	}
 	
 }
