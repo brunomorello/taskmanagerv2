@@ -17,6 +17,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import br.com.bmo.taskmanager.repository.UserRepository;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -28,6 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private TokenService tokenService;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Override
 	@Bean
@@ -49,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
-				.addFilterBefore(new AuthenticationUsingTokenFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
+				.addFilterBefore(new AuthenticationUsingTokenFilter(tokenService, userRepository), UsernamePasswordAuthenticationFilter.class);
 //			.and()
 //				.formLogin(form -> form
 //					.loginPage("/login")
