@@ -12,7 +12,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -23,6 +25,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //	private DataSource dataSource;
 	@Autowired
 	private CustomAuthenticationService custAuthService;
+	
+	@Autowired
+	private TokenService tokenService;
 	
 	@Override
 	@Bean
@@ -41,16 +46,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.POST, "/auth").permitAll()
 			.anyRequest().authenticated()
 			.and()
-				.formLogin(form -> form
-					.loginPage("/login")
-					.defaultSuccessUrl("/home", true)
-					.permitAll()
-				)
-				.logout(logout -> logout
-						.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-						.logoutSuccessUrl("/home")
-				)
-				.csrf().disable();
+				.csrf().disable()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and()
+				.addFilterBefore(new AuthenticationUsingTokenFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
+//			.and()
+//				.formLogin(form -> form
+//					.loginPage("/login")
+//					.defaultSuccessUrl("/home", true)
+//					.permitAll()
+//				)
+//				.logout(logout -> logout
+//						.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+//						.logoutSuccessUrl("/home")
+//				)
+//				.csrf().disable();
 	}
 	
 	// Authentication Configs
