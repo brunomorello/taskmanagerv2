@@ -86,7 +86,7 @@ public class User implements UserDetails {
 	@Override
 	public String toString() {
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", username=" + username + ", enabled="
-				+ enabled + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", task=" + task + "]";
+				+ enabled + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
