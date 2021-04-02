@@ -2,6 +2,7 @@ package br.com.bmo.taskmanager.controller.dto;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -67,7 +68,10 @@ public class TaskDTOForm {
 	}
 	
 	public Task parse(UserRepository userRepository, StatusRepository statusRepository, CategoryRepository categoryRepository) {
-		User userObj = userRepository.findByUsername(getOwner());
+		Optional<User> userOpt = userRepository.findByUsername(getOwner());
+		User userObj = null; 
+		if (userOpt.isPresent())
+			userObj = userOpt.get();
 		Status statusObj = statusRepository.findByName(getStatus());
 		Category categoryObj = categoryRepository.findByName(getCategory());
 		return new Task(
@@ -81,7 +85,8 @@ public class TaskDTOForm {
 
 	public Task update(Integer id, TaskAPIRepository taskAPIRepository, StatusRepository statusRepository, CategoryRepository categoryRepository, UserRepository userRepository) {
 		Task task = taskAPIRepository.getOne(id);
-		User userObj = userRepository.findByUsername(getOwner());
+		Optional<User> userOpt = userRepository.findByUsername(getOwner());
+		User userObj = userOpt.isPresent() ? userOpt.get() : null; 
 		Status statusObj = statusRepository.findByName(getStatus());
 		Category categoryObj = categoryRepository.findByName(getCategory());
 		

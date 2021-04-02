@@ -1,6 +1,7 @@
 package br.com.bmo.taskmanager.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,10 @@ public class UserService {
 	}
 	
 	public User getUserByUserName(String username) {
-		return userRepository.findByUsername(username);
+		Optional<User> user = userRepository.findByUsername(username);
+		if (user.isPresent())
+			return user.get();
+		return null;
 	}
 	
 	public void delete(User user) {
