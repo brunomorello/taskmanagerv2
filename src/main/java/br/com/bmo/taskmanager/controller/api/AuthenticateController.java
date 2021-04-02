@@ -30,7 +30,6 @@ public class AuthenticateController {
 	public ResponseEntity<?> auth(@Valid @RequestBody AuthForm form) {
 		
 		try {
-
 			UsernamePasswordAuthenticationToken userAuth = form.parse();
 			Authentication authentication = authManager.authenticate(userAuth);
 			String token = tokenService.generate(authentication);
