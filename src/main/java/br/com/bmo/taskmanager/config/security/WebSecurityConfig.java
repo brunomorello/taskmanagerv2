@@ -5,6 +5,7 @@ package br.com.bmo.taskmanager.config.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,6 +22,7 @@ import br.com.bmo.taskmanager.repository.UserRepository;
 
 @Configuration
 @EnableWebSecurity
+@Profile(value = {"prod", "test"})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 //	@Autowired
@@ -50,6 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.GET, "/api/categories/*").permitAll()
 			.antMatchers(HttpMethod.POST, "/auth").permitAll()
 			.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+			.antMatchers(HttpMethod.DELETE, "/api/tasks/*").hasRole("ADMIN")
 			.anyRequest().authenticated()
 			.and()
 				.csrf().disable()

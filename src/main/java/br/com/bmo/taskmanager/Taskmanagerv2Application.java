@@ -27,20 +27,20 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class Taskmanagerv2Application implements CommandLineRunner {
 	
-	private final CategoryService categoryService;
-	private final UserService userService;
-	private final StatusService statusService;
-	private final TaskService taskService;
-	private final TaskReportService taskReportService;
-
-	public Taskmanagerv2Application(CategoryService categoryService, UserService userService,
-			StatusService statusService, TaskService taskService, TaskReportService taskReportService) {
-		this.categoryService = categoryService;
-		this.userService = userService;
-		this.statusService = statusService;
-		this.taskService = taskService;
-		this.taskReportService = taskReportService;
-	}
+//	private final CategoryService categoryService;
+//	private final UserService userService;
+//	private final StatusService statusService;
+//	private final TaskService taskService;
+//	private final TaskReportService taskReportService;
+//
+//	public Taskmanagerv2Application(CategoryService categoryService, UserService userService,
+//			StatusService statusService, TaskService taskService, TaskReportService taskReportService) {
+//		this.categoryService = categoryService;
+//		this.userService = userService;
+//		this.statusService = statusService;
+//		this.taskService = taskService;
+//		this.taskReportService = taskReportService;
+//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(Taskmanagerv2Application.class, args);
