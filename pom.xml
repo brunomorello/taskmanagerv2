@@ -15,7 +15,7 @@
 	<name>taskmanagerv2</name>
 	<description>Taskmanager App</description>
 	<!-- used to war projects -->
-	<packaging>war</packaging>
+	<!-- <packaging>war</packaging> -->
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -109,11 +109,11 @@
 		</dependency>
 
 		<!-- tomcat used to generate war project -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
