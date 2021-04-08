@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -24,7 +26,14 @@ import br.com.bmo.taskmanager.service.UserService;
 @SpringBootApplication
 @EnableCaching
 @EnableSpringDataWebSupport
-public class Taskmanagerv2Application implements CommandLineRunner {
+//public class Taskmanagerv2Application implements CommandLineRunner {
+public class Taskmanagerv2Application extends SpringBootServletInitializer {
+	
+	// run mvn clean package (generate build)
+	@Override
+		protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+			return builder.sources(Taskmanagerv2Application.class);
+		}
 	
 //	private final CategoryService categoryService;
 //	private final UserService userService;
@@ -45,8 +54,8 @@ public class Taskmanagerv2Application implements CommandLineRunner {
 		SpringApplication.run(Taskmanagerv2Application.class, args);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
+//	@Override
+//	public void run(String... args) throws Exception {
 		
 //		Category category = new Category();
 //		category.setName("Study");
@@ -118,6 +127,6 @@ public class Taskmanagerv2Application implements CommandLineRunner {
 //		
 //		System.out.println("Testing Task Report using Specification");
 //		taskReportService.execute(null, null, 5, null, null);
-	}
+//	}
 
 }
